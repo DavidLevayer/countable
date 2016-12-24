@@ -1,0 +1,9 @@
+.DS_Store
+.idea
+.tscache
+.baseDir.js
+.baseDir.ts
+
+/node_modules/
+/coverage/
+/dist/
