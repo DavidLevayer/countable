@@ -32,4 +32,5 @@ class PingRouter {
 }
 
 // Export configured router
-export var pingRouter = new PingRouter().router;
+let pingRouter = new PingRouter().router;
+export { pingRouter }
