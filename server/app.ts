@@ -21,8 +21,9 @@ if (app.get('env') === 'production') {
 }
 
 // catch 404 and forward to error handler
-app.use(function (req: express.Request, res: express.Response, next) {
+app.use(function (req: express.Request, res: express.Response, next: express.NextFunction) {
   let err = new Error('Not Found');
+  res.status(404);
   next(err);
 });
 
@@ -30,7 +31,7 @@ app.use(function (req: express.Request, res: express.Response, next) {
 // no stacktrace leaked to user
 app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
 
-  res.status(err.status || 500);
+  res.status(res.statusCode || 500);
   res.json({
     error: {},
     message: err.message
