@@ -2,6 +2,12 @@
 
 [![Build Status](https://travis-ci.org/DavidLevayer/countable.svg?branch=develop)](https://travis-ci.org/DavidLevayer/countable)
 
+1. [Overview](#overview)  
+2. [Functionnalities](#functionnalities)  
+3. [Main commands](#main-commands)  
+4. [License](#license)
+5. [Contributions](#contributions)
+
 ## Overview
 
 Project status: :construction:**under development** :construction:.
