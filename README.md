@@ -1,31 +1,40 @@
 # Countable
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.24.
+[![Build Status](https://travis-ci.org/DavidLevayer/countable.svg?branch=develop)](https://travis-ci.org/DavidLevayer/countable)
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Project status: **under development**.
 
-## Code scaffolding
+This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.24. It is mainly based on following technologies:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+Backend:
+* Typescript 2.x
+* Express 4.x (restful api)
+* Mocha and Chai (unit tests)
+* TSLint and CodeLyzer (code quality)
 
-## Build
+Frontend:
+* Typescript 2.x
+* Angular 2.3.x
+* Jasmine and Karma (unit tests)
+* TSLint and CodeLyzer (code quality)
+* Webpack (build)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+## Main commands
 
-## Running unit tests
+* `npm install` Install dependencies
+* `npm start` Start both frontend and backend
+* `npm run front` Start frontend
+* `npm run server` Start backend
+* `npm run build` Build the whole application
+* `npm test` Start both frontend and backend unit tests
+* `npm run front-test` Start frontend unit tests
+* `npm run back-test` Start backend unit tests
+* `npm run lint` Start linter
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## License
 
-## Running end-to-end tests
+MIT
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+## Contributions
 
-## Deploying to Github Pages
-
-Run `ng github-pages:deploy` to deploy to Github Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Any contribution or suggestion would be really appreciated. Do not hesitate to use the Issue section or to send a pull request.
