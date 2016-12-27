@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.org/DavidLevayer/countable.svg?branch=develop)](https://travis-ci.org/DavidLevayer/countable)
 
-Project status: **under development**.
+## Overview
+
+Project status: :construction:**under development** :construction:.
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.24. It is mainly based on following technologies:
 
@@ -18,6 +20,26 @@ Frontend:
 * Jasmine and Karma (unit tests)
 * TSLint and CodeLyzer (code quality)
 * Webpack (build)
+
+## Functionnalities
+
+List of planned functionality:
+- [ ] Create and manage accounts
+- [ ] Create and manage categories
+- [ ] Create and manage subcategories
+- [ ] Standard transactions (incomes/expenses)
+- [ ] Account-to-account transactions
+- [ ] Dashboard
+- [ ] Statistic tools and graphics
+- [ ] Multi-user application
+
+List of developer features:
+- [x] Continuous integration (Travis CI)
+- [x] Frontend Unit tests
+- [x] Frontend code coverage tool
+- [x] Backend Unit tests
+- [ ] Backend code coverage tool
+- [ ] End-to-end (e2e) tests
 
 ## Main commands
 
