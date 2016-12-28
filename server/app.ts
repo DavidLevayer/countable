@@ -12,8 +12,8 @@ export class Server extends ServerLoader implements IServerLifecycle {
 
     const appPath: string = Path.resolve(__dirname);
 
-    this.setEndpoint('/api/v1')
-      .scan(appPath + '/routes/**/*.router.js')
+    // Mounts api routes
+    this.mount('/api/v1', appPath + '/routes/**/*.router.js')
       .createHttpServer(9876);
   }
 
