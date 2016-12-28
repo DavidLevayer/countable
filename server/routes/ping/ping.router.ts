@@ -1,4 +1,4 @@
-import { Controller, Get } from "ts-express-decorators";
+import { Controller, Get } from 'ts-express-decorators';
 
 @Controller('/')
 export class PingRouter {

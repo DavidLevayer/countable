@@ -14,7 +14,7 @@ class AppTest {
     // Ensure app is fully started
     appStarted.then(() => {
       done();
-    })
+    });
   }
 
   @test 'should handle 404'(done) {

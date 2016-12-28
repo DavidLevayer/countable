@@ -14,10 +14,10 @@ class PingTest {
     // Ensure app is fully started
     appStarted.then(() => {
       done();
-    })
+    });
   }
 
-  @test 'should ping api' (done) {
+  @test 'should ping api'(done) {
     chai.request(app).get('/api/v1').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('object');
