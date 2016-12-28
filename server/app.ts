@@ -26,6 +26,7 @@ export class Server extends ServerLoader implements IServerLifecycle {
     const bodyParser = require('body-parser');
 
     this
+      .use(ServerLoader.AcceptMime("application/json"))
       .use(bodyParser.json())
       .use(bodyParser.urlencoded({
         extended: false
@@ -41,9 +42,8 @@ export class Server extends ServerLoader implements IServerLifecycle {
   public $onServerInitError(err) {
     console.error(err);
   }
-
-  static Initialize = (): Promise<any> => new Server().start();
-
 }
 
-Server.Initialize();
+let server: Server = new Server();
+export var appStarted = server.start();
+export var app: Express.Application = server.getExpressApp();
