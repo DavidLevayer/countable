@@ -16,8 +16,8 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 
 Backend:
 * Typescript 2.x
-* Express 4.x (restful api)
-* Mocha and Chai (unit tests)
+* Express 4.x (restful api) and ts-express-decorators
+* Mocha, Chai and mocha-typescript (unit tests)
 * TSLint and CodeLyzer (code quality)
 
 Frontend:
@@ -45,6 +45,7 @@ List of developer features:
 - [x] Frontend code coverage tool
 - [x] Backend Unit tests
 - [ ] Backend code coverage tool
+- [ ] Integrate online code coverage tool
 - [ ] End-to-end (e2e) tests
 
 ## Main commands
