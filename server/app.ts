@@ -1,41 +1,49 @@
-import * as express from 'express';
-import { json, urlencoded } from 'body-parser';
-import * as path from 'path';
+import 'express';
+import { ServerLoader, IServerLifecycle } from 'ts-express-decorators';
+import Path = require('path');
 
-import { pingRouter } from './routes/ping/ping.router';
+export class Server extends ServerLoader implements IServerLifecycle {
+  /**
+   * In your constructor set the global endpoint and configure the folder to scan the controllers.
+   * You can start the http and https server.
+   */
+  constructor() {
+    super();
 
-const app: express.Application = express();
+    const appPath: string = Path.resolve(__dirname);
 
-app.disable('x-powered-by');
+    this.setEndpoint('/api/v1')
+      .scan(appPath + '/routes/**/*.router.js')
+      .createHttpServer(9876);
+  }
 
-app.use(json());
-app.use(urlencoded({ extended: false }));
+  /**
+   * This method let you configure the middleware required by your application to works.
+   * @returns {Server}
+   */
+  $onMountingMiddlewares(): void|Promise<any> {
 
-// api routes
-app.use('/api/v1', pingRouter);
+    const bodyParser = require('body-parser');
 
-if (app.get('env') === 'production') {
+    this
+      .use(bodyParser.json())
+      .use(bodyParser.urlencoded({
+        extended: false
+      }));
 
-  // in production mode run application from dist folder
-  app.use(express.static(path.join(__dirname, '/../client')));
+    return null;
+  }
+
+  public $onReady() {
+    console.log('Server started on port 9876...');
+  }
+
+  public $onServerInitError(err) {
+    console.error(err);
+  }
+
+  static Initialize = (): Promise<any> => new Server().start();
+
 }
 
-// catch 404 and forward to error handler
-app.use(function (req: express.Request, res: express.Response, next: express.NextFunction) {
-  let err = new Error('Not Found');
-  res.status(404);
-  next(err);
-});
-
-// production error handler
-// no stacktrace leaked to user
-app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
-
-  res.status(res.statusCode || 500);
-  res.json({
-    error: {},
-    message: err.message
-  });
-});
-
-export { app }
+Server.Initialize();
