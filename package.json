@@ -9,7 +9,7 @@
     "build": "npm run clean && npm run build-server && ng build",
     "build-server": "tsc -p server",
     "front": "ng serve",
-    "server": "npm run build-server && node dist/server/index.js",
+    "server": "npm run build-server && node dist/server/app.js",
     "lint": "tslint \"src/**/*.ts\" \"server/**/*.ts\"",
     "back-test": "mocha server/**/*.ts --compilers ts:ts-node/register",
     "front-test": "ng test --watch=false --code-coverage",
