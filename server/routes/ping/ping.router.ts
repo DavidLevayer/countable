@@ -4,7 +4,9 @@ import { Controller, Get } from "ts-express-decorators";
 export class PingRouter {
 
   @Get('')
-  public get() {
-    return { message: 'Api working!' };
+  public get(req, res) {
+    res.json({
+      message: 'Api working!'
+    });
   }
 }
