@@ -1,5 +1,5 @@
 import {} from 'mocha';
-import { app } from '../../app';
+import { app, appStarted } from '../../app';
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -7,6 +7,13 @@ chai.use(chaiHttp);
 let should = chai.should();
 
 describe('Ping', () => {
+
+  before(function (done) {
+    // Ensure app is fully started
+    appStarted.then(() => {
+      done();
+    })
+  });
 
   it('should ping api', (done) => {
     chai.request(app).get('/api/v1').end((err, res) => {
