@@ -11,7 +11,7 @@
     "front": "ng serve",
     "server": "npm run build-server && node dist/server/app.js",
     "lint": "tslint \"src/**/*.ts\" \"server/**/*.ts\"",
-    "back-test": "mocha server/**/*.ts --compilers ts:ts-node/register",
+    "back-test": "npm run build-server && mocha dist/server/**/*.spec.js",
     "front-test": "ng test --watch=false --code-coverage",
     "test": "npm run back-test && npm run front-test",
     "clean": "rm -rf dist coverage && npm cache clean",
