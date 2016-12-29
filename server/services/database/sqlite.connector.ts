@@ -1,6 +1,7 @@
 import { Database, Statement } from 'sqlite3';
 import { IDatabaseConnector } from './database.connector';
 
+/* tslint:disable:no-console */
 export class SQLiteConnector implements IDatabaseConnector {
 
   /** SQLite database object */
@@ -78,3 +79,4 @@ export class SQLiteConnector implements IDatabaseConnector {
     });
   }
 }
+/* tslint:enable:no-console */
