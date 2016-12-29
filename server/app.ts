@@ -15,6 +15,8 @@ export class Server extends ServerLoader implements IServerLifecycle {
     // Mounts api routes
     this.mount('/api/v1', appPath + '/routes/**/*.router.js')
       .createHttpServer(9876);
+
+    this.mount('api/v1', appPath + '/services/**/*.service.js');
   }
 
   /**

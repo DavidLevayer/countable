@@ -17,6 +17,7 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 Backend:
 * Typescript 2.x
 * Express 4.x (restful api) and ts-express-decorators
+* SQLite using sqlite3 module
 * Mocha, Chai and mocha-typescript (unit tests)
 * TSLint and CodeLyzer (code quality)
 
