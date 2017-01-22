@@ -18,6 +18,6 @@ export class DatabaseService {
   }
 
   public executeQuery(query: string, ...params: any[]): Promise<any[]> {
-    return this.databaseConnector.executeQuery(query, params);
+    return this.databaseConnector.executeQuery(query, ...params);
   }
 }
