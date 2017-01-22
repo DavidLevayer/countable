@@ -9,7 +9,9 @@ export class AccountService implements CrudService {
   }
 
   get(objectId: number): Promise<any> {
-    return null;
+
+    const query = 'SELECT * FROM Account WHERE accountId = ?;';
+    return this.databaseService.executeQuery(query, objectId);
   }
 
   getAll(): Promise<any[]> {

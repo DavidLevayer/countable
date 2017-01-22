@@ -18,4 +18,20 @@ export class AccountRouter extends BasicRouter {
       this.throwError(res, 'An error has occured while getting accounts');
     });
   }
+
+  @Get('/:id')
+  public get(req, res) {
+
+    let id: number = +req.params.id;
+
+    if (isNaN(id)) {
+      this.throwError(res, 'Invalid identifier: ' + req.params.id, 400);
+    } else {
+      return this.accountService.get(id).then((rows) => {
+        res.json(rows);
+      }).catch(err => {
+        this.throwError(res, 'An error has occured while getting account ' + id);
+      });
+    }
+  }
 }
