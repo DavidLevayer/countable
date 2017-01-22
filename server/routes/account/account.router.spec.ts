@@ -25,4 +25,22 @@ class AccountTest {
       done();
     });
   }
+
+  @test 'should get an account'(done) {
+
+    chai.request(app).get('/api/v1/account/123').end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('array');
+      done();
+    });
+  }
+
+  @test 'should handle error while getting an account'(done) {
+
+    chai.request(app).get('/api/v1/account/azerty').end((err, res) => {
+      res.should.have.status(400);
+      res.body.should.have.property('message').eql('Invalid identifier: azerty');
+      done();
+    });
+  }
 }

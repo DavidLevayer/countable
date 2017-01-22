@@ -9,8 +9,8 @@ let expect = chai.expect;
 @suite('Account service')
 class AccountServiceTest {
 
-  private service;
-  private databaseServiceMock;
+  private service: AccountService;
+  private databaseServiceMock: any;
 
   before() {
     this.databaseServiceMock = new DatabaseServiceMock();
@@ -21,6 +21,16 @@ class AccountServiceTest {
     let expectedRes = [ { id: 1, name: 'account' } ];
     this.databaseServiceMock.toReturn = expectedRes;
     this.service.getAll().then((res) => {
+      expect(res).to.be.a('array');
+      expect(res).to.eql(expectedRes);
+      done();
+    });
+  }
+
+  @test 'should get an account'(done) {
+    let expectedRes = [ { id: 1, name: 'account' } ];
+    this.databaseServiceMock.toReturn = expectedRes;
+    this.service.get(1).then((res) => {
       expect(res).to.be.a('array');
       expect(res).to.eql(expectedRes);
       done();
