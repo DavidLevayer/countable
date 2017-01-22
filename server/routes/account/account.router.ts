@@ -3,7 +3,7 @@ import { CrudRouter } from '../crud.router';
 import { AccountService } from '../../services/account/account.service';
 
 @Controller('/account')
-export class PingRouter implements CrudRouter {
+export class AccountRouter implements CrudRouter {
 
   constructor(private accountService: AccountService) {
   }

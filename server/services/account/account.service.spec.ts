@@ -24,6 +24,6 @@ class AccountServiceTest {
       expect(res).to.be.a('array');
       expect(res).to.eql(expectedRes);
       done();
-    })
+    });
   }
 }
