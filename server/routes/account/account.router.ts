@@ -1,11 +1,12 @@
 import { Controller, Get } from 'ts-express-decorators';
-import { CrudRouter } from '../crud.router';
 import { AccountService } from '../../services/account/account.service';
+import { BasicRouter } from '../basic.router';
 
 @Controller('/account')
-export class AccountRouter implements CrudRouter {
+export class AccountRouter extends BasicRouter {
 
   constructor(private accountService: AccountService) {
+    super();
   }
 
   @Get('/')
@@ -14,13 +15,7 @@ export class AccountRouter implements CrudRouter {
     return this.accountService.getAll().then((rows) => {
       res.json(rows);
     }).catch(err => {
-      // Log error
-      console.error(err);
-      // Set response status and message
-      res.status(500);
-      res.json({
-        message: 'An error occurs while getting accounts'
-      });
+      this.throwError(res, 'An error has occured while getting accounts');
     });
   }
 }
