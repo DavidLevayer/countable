@@ -1,6 +1,7 @@
 import { Controller, Get, PathParams, Response } from 'ts-express-decorators';
 import { AccountService } from '../../services/account/account.service';
 import { BasicRouter } from '../basic.router';
+import * as Express from "express";
 
 @Controller('/account')
 export class AccountRouter extends BasicRouter {
@@ -10,7 +11,7 @@ export class AccountRouter extends BasicRouter {
   }
 
   @Get('/')
-  public getAll(@Response() res) {
+  public getAll(@Response() res: Express.Response) {
 
     return this.accountService.getAll().then((rows) => {
       res.json(rows);
@@ -21,7 +22,7 @@ export class AccountRouter extends BasicRouter {
   }
 
   @Get('/:id')
-  public get(@PathParams('id') id: number, @Response() res) {
+  public get(@PathParams('id') id: number, @Response() res: Express.Response) {
 
     if (isNaN(id)) {
       this.throwError(res, 'Invalid identifier: ' + id, 400);
