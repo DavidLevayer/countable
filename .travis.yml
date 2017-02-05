@@ -2,13 +2,13 @@ sudo: required
 dist: trusty
 language: node_js
 node_js:
-  - '4.2'
+  - '4.6'
 
 notifications:
   email: false
 
 before_install:
-- if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
+- npm i -g npm@3.9.5
 
 install:
 - npm install
