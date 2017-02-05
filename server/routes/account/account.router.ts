@@ -1,13 +1,13 @@
 import { Controller, Get, PathParams, Response, Post, BodyParams } from 'ts-express-decorators';
 import { AccountService } from '../../services/account/account.service';
 import { BasicRouter } from '../basic.router';
-import * as Express from "express";
+import * as Express from 'express';
 import { isUndefined } from 'util';
 
 @Controller('/account')
 export class AccountRouter extends BasicRouter {
 
-  private static ERR_ACCOUNT_NAME: string = 'SQLITE_CONSTRAINT: UNIQUE constraint failed: Account.name';
+  private static ERR_ACCOUNT_NAME = 'SQLITE_CONSTRAINT: UNIQUE constraint failed: Account.name';
 
   constructor(private accountService: AccountService) {
     super();

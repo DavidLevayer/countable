@@ -2,7 +2,7 @@
 export class DatabaseServiceMock {
 
   public toReturn: any;
-  public shouldFail: boolean = false;
+  public shouldFail = false;
   public failMessage: string;
 
   public executeQuery(query: string, ...params: any[]): Promise<any[]> {
