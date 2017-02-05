@@ -25,7 +25,7 @@ export class AccountRouter extends BasicRouter {
   }
 
   @Get('/:id')
-  public get(@PathParams('id') id: number, @Response() res: Express.Response) {
+  public get(@PathParams('id') id: any, @Response() res: Express.Response) {
 
     if (isNaN(id)) {
       this.throwError(res, 'Invalid identifier: ' + id, 400);
