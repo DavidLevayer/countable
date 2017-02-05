@@ -8,19 +8,19 @@ export class AccountService implements CrudService {
   constructor(private databaseService: DatabaseService) {
   }
 
-  get(objectId: number): Promise<any> {
+  get(objectId: number): Promise<Account> {
 
     const query = 'SELECT * FROM Account WHERE accountId = ?;';
     return this.databaseService.select(query, objectId);
   }
 
-  getAll(): Promise<any[]> {
+  getAll(): Promise<Account[]> {
 
     const query = 'SELECT * FROM Account;';
     return this.databaseService.select(query, []);
   }
 
-  create(accountName: string): Promise<any> {
+  create(accountName: string): Promise<Account> {
 
     const query = 'INSERT INTO Account (name) VALUES (?);';
     return this.databaseService.insert(query, accountName).then(insertedId => {
@@ -28,7 +28,7 @@ export class AccountService implements CrudService {
     });
   }
 
-  update(object: any): Promise<any> {
+  update(object: any): Promise<Account> {
     return null;
   }
 
