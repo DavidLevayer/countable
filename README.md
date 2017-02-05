@@ -48,6 +48,7 @@ List of developer features:
 - [ ] Backend code coverage tool
 - [ ] Integrate online code coverage tool
 - [ ] End-to-end (e2e) tests
+- [ ] Docker integration
 
 ## Main commands
 
