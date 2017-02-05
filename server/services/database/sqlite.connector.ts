@@ -1,7 +1,6 @@
 import { Database } from 'sqlite3';
-import { IDatabaseConnector } from './database.connector';
+import { IDatabaseConnector, QueryType } from './database.connector';
 
-/* tslint:disable:no-console */
 export class SQLiteConnector implements IDatabaseConnector {
 
   /** SQLite database object */
@@ -19,26 +18,57 @@ export class SQLiteConnector implements IDatabaseConnector {
 
   /**
    * Executes given query with given parameters
+   * @param queryType the query type, i.e. select, insert, etc.
    * @param query the query to execute
    * @param params the query parameters
    * @returns {Promise<any[]>} rows returned by the query
    */
-  public executeQuery(query: string, ...params: any[]): Promise<any[]> {
+  public executeQuery(queryType: QueryType, query: string, ...params: any[]): Promise<any[]> {
 
     if (this.debug) {
+      /* tslint:disable:no-console */
       console.info('\nRunning query: ' + query);
       console.info('With params: ' + params);
+      /* tslint:enable:no-console */
     }
 
     return new Promise((resolve, reject) => {
-      this.db.all(query, params, function (err, rows) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(rows);
-        }
-      });
+
+      switch (queryType) {
+        case QueryType.SELECT:
+          this.db.all(query, params, (err, rows) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(rows);
+            }
+          });
+          break;
+        case QueryType.INSERT:
+          this.db.run(query, params, function (err) {
+            // Do not use arrow function so we can access 'this'
+            // See https://github.com/mapbox/node-sqlite3/wiki/API#databaserunsql-param--callback
+            if (err) {
+              reject(err);
+            } else {
+              resolve(this.lastID);
+            }
+          });
+          break;
+        case QueryType.UPDATE:
+        case QueryType.DELETE:
+          this.db.run(query, params, function (err) {
+            // Do not use arrow function so we can access 'this'
+            // See https://github.com/mapbox/node-sqlite3/wiki/API#databaserunsql-param--callback
+            if (err) {
+              reject(err);
+            } else {
+              resolve(this.changes);
+            }
+          });
+          break;
+
+      }
     });
   }
 }
-/* tslint:enable:no-console */

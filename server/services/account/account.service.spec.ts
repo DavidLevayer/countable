@@ -18,7 +18,7 @@ class AccountServiceTest {
   }
 
   @test 'should get all accounts'(done) {
-    let expectedRes = [ { id: 1, name: 'account' } ];
+    let expectedRes = [{id: 1, name: 'account'}];
     this.databaseServiceMock.toReturn = expectedRes;
     this.service.getAll().then((res) => {
       expect(res).to.be.a('array');
@@ -28,9 +28,19 @@ class AccountServiceTest {
   }
 
   @test 'should get an account'(done) {
-    let expectedRes = [ { id: 1, name: 'account' } ];
+    let expectedRes = [{id: 1, name: 'account'}];
     this.databaseServiceMock.toReturn = expectedRes;
     this.service.get(1).then((res) => {
+      expect(res).to.be.a('array');
+      expect(res).to.eql(expectedRes);
+      done();
+    });
+  }
+
+  @test 'should create an account'(done) {
+    let expectedRes = [{id: 1, name: 'account'}];
+    this.databaseServiceMock.toReturn = expectedRes;
+    this.service.create('account').then((res) => {
       expect(res).to.be.a('array');
       expect(res).to.eql(expectedRes);
       done();

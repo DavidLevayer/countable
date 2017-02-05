@@ -11,19 +11,19 @@ export class AccountService implements CrudService {
   get(objectId: number): Promise<any> {
 
     const query = 'SELECT * FROM Account WHERE accountId = ?;';
-    return this.databaseService.executeQuery(query, objectId);
+    return this.databaseService.select(query, objectId);
   }
 
   getAll(): Promise<any[]> {
 
     const query = 'SELECT * FROM Account;';
-    return this.databaseService.executeQuery(query, []);
+    return this.databaseService.select(query, []);
   }
 
   create(accountName: string): Promise<any> {
 
     const query = 'INSERT INTO Account (name) VALUES (?);';
-    return this.databaseService.executeQuery(query, accountName);
+    return this.databaseService.insert(query, accountName);
   }
 
   update(object: any): Promise<any> {

@@ -1,3 +1,10 @@
+export enum QueryType {
+  SELECT,
+  INSERT,
+  UPDATE,
+  DELETE
+}
+
 export interface IDatabaseConnector {
 
   /**
@@ -6,5 +13,5 @@ export interface IDatabaseConnector {
    * @param params the query parameters
    * @returns {Promise<any[]>} rows returned by the query
    */
-  executeQuery(query: string, ...params: any[]): Promise<any[]>;
+  executeQuery(queryType: QueryType, query: string, ...params: any[]): Promise<any[]>;
 }
