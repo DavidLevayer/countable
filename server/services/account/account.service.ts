@@ -20,8 +20,10 @@ export class AccountService implements CrudService {
     return this.databaseService.executeQuery(query, []);
   }
 
-  create(object: any): Promise<any> {
-    return null;
+  create(account: Account): Promise<any> {
+
+    const query = 'INSERT INTO Account (name) VALUES (?);';
+    return this.databaseService.executeQuery(query, account.name);
   }
 
   update(object: any): Promise<any> {
