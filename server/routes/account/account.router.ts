@@ -1,4 +1,4 @@
-import { Controller, Get, PathParams, Response, Post, BodyParams, Required } from 'ts-express-decorators';
+import { Controller, Get, PathParams, Response, Post, BodyParams } from 'ts-express-decorators';
 import { AccountService } from '../../services/account/account.service';
 import { BasicRouter } from '../basic.router';
 import * as Express from "express";
