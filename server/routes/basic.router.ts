@@ -20,7 +20,7 @@ export class BasicRouter implements CrudRouter {
    * Log the given message as an error
    * @param message
    */
-  public logError(message: string): void {
+  public logError(message: string, stack?: string): void {
     console.error(message);
   }
 }
