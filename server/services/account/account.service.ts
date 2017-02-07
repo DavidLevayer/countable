@@ -1,6 +1,7 @@
 import { Service } from 'ts-express-decorators';
 import { DatabaseService } from '../database/database.service';
 import { CrudService } from '../crud.service';
+import { Account } from '../../models/account/account';
 
 @Service()
 export class AccountService implements CrudService {

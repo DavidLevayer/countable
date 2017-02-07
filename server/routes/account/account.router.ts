@@ -3,6 +3,7 @@ import { AccountService } from '../../services/account/account.service';
 import { BasicRouter } from '../basic.router';
 import * as Express from 'express';
 import { isUndefined } from 'util';
+import { Account } from '../../models/account/account';
 
 @Controller('/account')
 export class AccountRouter extends BasicRouter {
@@ -40,24 +41,24 @@ export class AccountRouter extends BasicRouter {
   }
 
   @Post('/')
-  public create(@BodyParams('name') name: any, @Response() res: Express.Response) {
+  public create(@BodyParams() account: Account, @Response() res: Express.Response) {
 
-    if (isUndefined(name) || name.length === 0) {
+    if (isUndefined(account.name) || account.name.length === 0) {
       // No account name is specified
       this.throwError(res, 'Parameter request.body.name is required', 400);
     } else {
       // Create a new account
-      return this.accountService.create(name).then((rows) => {
+      return this.accountService.create(account.name).then((rows) => {
         res.json(rows);
       }).catch((err: Error) => {
 
         if (err.message === AccountRouter.ERR_ACCOUNT_NAME) {
           // Given account name is already used
-          this.throwError(res, 'Account name \'' + name + '\' is already used', 400);
+          this.throwError(res, 'Account name \'' + account.name + '\' is already used', 400);
         } else {
           // Internal error
           this.logError(err.message, err.stack);
-          this.throwError(res, 'An error has occured while creating account \'' + name + '\'');
+          this.throwError(res, 'An error has occured while creating account \'' + account.name + '\'');
         }
       });
     }
