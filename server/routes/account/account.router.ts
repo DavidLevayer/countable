@@ -48,7 +48,7 @@ export class AccountRouter extends BasicRouter {
       this.throwError(res, 'Parameter request.body.name is required', 400);
     } else {
       // Create a new account
-      return this.accountService.create(account.name).then((rows) => {
+      return this.accountService.create(account).then((rows) => {
         res.json(rows);
       }).catch((err: Error) => {
 

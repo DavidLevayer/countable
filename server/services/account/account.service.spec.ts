@@ -2,6 +2,7 @@ import {} from 'mocha';
 import { test, suite } from 'mocha-typescript';
 import { AccountService } from './account.service';
 import { DatabaseServiceMock } from '../database/database.service.mock';
+import { Account } from '../../models/account/account';
 
 let chai = require('chai');
 let expect = chai.expect;
@@ -40,7 +41,10 @@ class AccountServiceTest {
   @test 'should create an account'(done) {
     let expectedRes = [{id: 1, name: 'account'}];
     this.databaseServiceMock.toReturn = expectedRes;
-    this.service.create('account').then((res) => {
+
+    let account: Account = new Account();
+    account.name = 'account';
+    this.service.create(account).then((res) => {
       expect(res).to.be.a('array');
       expect(res).to.eql(expectedRes);
       done();
