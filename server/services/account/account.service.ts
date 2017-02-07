@@ -32,9 +32,7 @@ export class AccountService implements CrudService {
   update(account: Account): Promise<Account> {
 
     const query = 'UPDATE Account SET name = ? WHERE id = ?;';
-    return this.databaseService.update(query, account.name, account.id).then(updatedId => {
-      return this.get(updatedId);
-    });
+    return this.databaseService.update(query, account.name, account.id).then(() => account);
   }
 
   delete(id: number): Promise<boolean> {
