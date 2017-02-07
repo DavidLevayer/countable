@@ -39,7 +39,7 @@ class AccountTest {
 
     chai.request(app).get('/api/v1/account/azerty').end((err, res) => {
       res.should.have.status(400);
-      res.body.should.have.property('message').eql('Invalid identifier: azerty');
+      res.body.should.have.property('message').eql('Bad request, parameter request.params.id. Cast error. Expression value is not a number.');
       done();
     });
   }
