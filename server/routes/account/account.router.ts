@@ -26,18 +26,14 @@ export class AccountRouter extends BasicRouter {
   }
 
   @Get('/:id')
-  public get(@PathParams('id') id: any, @Response() res: Express.Response) {
+  public get(@PathParams('id') id: number, @Response() res: Express.Response) {
 
-    if (isNaN(id)) {
-      this.throwError(res, 'Invalid identifier: ' + id, 400);
-    } else {
-      return this.accountService.get(id).then((rows) => {
-        res.json(rows);
-      }).catch(err => {
-        this.logError(err);
-        this.throwError(res, 'An error has occured while getting account ' + id);
-      });
-    }
+    return this.accountService.get(id).then((rows) => {
+      res.json(rows);
+    }).catch(err => {
+      this.logError(err);
+      this.throwError(res, 'An error has occured while getting account ' + id);
+    });
   }
 
   @Post('/')
