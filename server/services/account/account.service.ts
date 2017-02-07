@@ -37,7 +37,10 @@ export class AccountService implements CrudService {
     });
   }
 
-  delete(object: any): Promise<boolean> {
-    return null;
+  delete(id: number): Promise<boolean> {
+    const query = 'DELETE FROM Account WHERE id = ?;';
+    return this.databaseService.delete(query, id).then((changes: number) => {
+      return changes > 0;
+    });
   }
 }

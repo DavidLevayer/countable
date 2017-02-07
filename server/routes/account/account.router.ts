@@ -1,4 +1,4 @@
-import { Controller, Get, PathParams, Response, Post, BodyParams, Put } from 'ts-express-decorators';
+import { Controller, Get, PathParams, Response, Post, BodyParams, Put, Delete } from 'ts-express-decorators';
 import { AccountService } from '../../services/account/account.service';
 import { BasicRouter } from '../basic.router';
 import * as Express from 'express';
@@ -89,5 +89,16 @@ export class AccountRouter extends BasicRouter {
         }
       });
     }
+  }
+
+  @Delete('/:id')
+  public delete(@PathParams('id') id: number, @Response() res: Express.Response) {
+
+    return this.accountService.delete(id).then(success => {
+      res.json({success: success});
+    }).catch((err: Error) => {
+      this.logError(err.message, err.stack);
+      this.throwError(res, 'An error has occured while removing account ' + id);
+    });
   }
 }
