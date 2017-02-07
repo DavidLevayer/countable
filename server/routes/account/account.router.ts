@@ -60,16 +60,15 @@ export class AccountRouter extends BasicRouter {
     }
   }
 
-  @Put('/')
-  public update(@BodyParams() account: Account, @Response() res: Express.Response) {
+  @Put('/:id')
+  public update(@PathParams('id') id: number, @BodyParams() account: Account, @Response() res: Express.Response) {
 
-    if (isUndefined(account.id) || isNaN(account.id)) {
-      // No valid account id is specified
-      this.throwError(res, 'Parameter request.body.id is required and should be a number', 400);
-    } else if (isUndefined(account.name) || account.name.length === 0) {
+    if (isUndefined(account.name) || account.name.length === 0) {
       // No account name is specified
       this.throwError(res, 'Parameter request.body.name is required', 400);
     } else {
+      // Override an eventual account id: route parameter has priority
+      account.id = id;
       // Update account
       return this.accountService.update(account).then((rows) => {
         res.json(rows);
