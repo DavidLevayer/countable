@@ -12,6 +12,10 @@ export class DatabaseServiceMock {
     return this.mockQuery();
   }
 
+  public update(query: string, ...params: any[]) {
+    return this.mockQuery();
+  }
+
   private mockQuery(): Promise<any[]> {
     if (this.shouldFail) {
       return Promise.reject(this.failMessage);

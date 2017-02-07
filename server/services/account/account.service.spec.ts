@@ -50,4 +50,18 @@ class AccountServiceTest {
       done();
     });
   }
+
+  @test 'should update an account'(done) {
+    let expectedRes = [{id: 1, name: 'account-update'}];
+    this.databaseServiceMock.toReturn = expectedRes;
+
+    let account: Account = new Account();
+    account.id = 123;
+    account.name = 'account-update';
+    this.service.update(account).then((res) => {
+      expect(res).to.be.a('array');
+      expect(res).to.eql(expectedRes);
+      done();
+    });
+  }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, PathParams, Response, Post, BodyParams } from 'ts-express-decorators';
+import { Controller, Get, PathParams, Response, Post, BodyParams, Put } from 'ts-express-decorators';
 import { AccountService } from '../../services/account/account.service';
 import { BasicRouter } from '../basic.router';
 import * as Express from 'express';
@@ -59,6 +59,33 @@ export class AccountRouter extends BasicRouter {
           // Internal error
           this.logError(err.message, err.stack);
           this.throwError(res, 'An error has occured while creating account \'' + account.name + '\'');
+        }
+      });
+    }
+  }
+
+  @Put('/')
+  public update(@BodyParams() account: Account, @Response() res: Express.Response) {
+
+    if (isUndefined(account.id) || isNaN(account.id)) {
+      // No valid account id is specified
+      this.throwError(res, 'Parameter request.body.id is required and should be a number', 400);
+    } else if (isUndefined(account.name) || account.name.length === 0) {
+      // No account name is specified
+      this.throwError(res, 'Parameter request.body.name is required', 400);
+    } else {
+      // Update account
+      return this.accountService.update(account).then((rows) => {
+        res.json(rows);
+      }).catch((err: Error) => {
+
+        if (err.message === AccountRouter.ERR_ACCOUNT_NAME) {
+          // Given account name is already used
+          this.throwError(res, 'Account name \'' + account.name + '\' is already used', 400);
+        } else {
+          // Internal error
+          this.logError(err.message, err.stack);
+          this.throwError(res, 'An error has occured while updating account \'' + account.name + '\'');
         }
       });
     }
