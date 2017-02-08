@@ -1,7 +1,7 @@
 import { Service } from 'ts-express-decorators';
 import { IDatabaseConnector, QueryType } from './database.connector';
 import { SQLiteConnector } from './sqlite.connector';
-import { populationQueries } from './population-queries';
+import { populationQueries, datasetQueries } from './population-queries';
 
 @Service()
 export class DatabaseService {
@@ -11,15 +11,28 @@ export class DatabaseService {
   constructor() {
 
     let db: IDatabaseConnector;
-    if (process.env.NODE_ENV === 'test') {
+    let isTest: boolean = process.env.NODE_ENV === 'test';
+
+    if (isTest) {
+      // Run temporary 'in-memory' database
       db = new SQLiteConnector(':memory:', true);
     } else {
+      // Use SQLite file as database
       db = new SQLiteConnector('./countable-database.sqlite', true);
     }
 
+    // Create table structure if needed
     populationQueries.forEach(function (query) {
       db.executeQuery(QueryType.INSERT, query, []);
     });
+
+    if (isTest) {
+      // Populate the database with test values
+      datasetQueries.forEach(function (query) {
+        db.executeQuery(QueryType.INSERT, query, []);
+      });
+    }
+
     this.databaseConnector = db;
   }
 
