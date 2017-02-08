@@ -10,7 +10,13 @@ export class DatabaseService {
 
   constructor() {
 
-    let db = new SQLiteConnector('./countable-database.sqlite', true);
+    let db: IDatabaseConnector;
+    if (process.env.NODE_ENV === 'test') {
+      db = new SQLiteConnector(':memory:', true);
+    } else {
+      db = new SQLiteConnector('./countable-database.sqlite', true);
+    }
+
     populationQueries.forEach(function (query) {
       db.executeQuery(QueryType.INSERT, query, []);
     });
