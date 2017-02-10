@@ -21,11 +21,10 @@ export const populationQueries: string[] = [
   subcategoryTableQuery
 ];
 
-const accountDataset: string =
-  'INSERT INTO Account VALUES (1, "account1");' +
-  'INSERT INTO Account VALUES (2, "account2");' +
-  'INSERT INTO Account VALUES (3, "account3");';
-
-export const datasetQueries: string[] = [
-  accountDataset
+const accountDataset: string[] = [
+  'INSERT INTO Account VALUES (1, \'test-account1\');',
+  'INSERT INTO Account VALUES (2, \'test-account2\');',
+  'INSERT INTO Account VALUES (3, \'test-account3\');'
 ];
+
+export const datasetQueries: string[] = accountDataset;

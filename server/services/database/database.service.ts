@@ -22,14 +22,17 @@ export class DatabaseService {
     }
 
     // Create table structure if needed
+    let tablePromises: Promise<any>[] = [];
     populationQueries.forEach(function (query) {
-      db.executeQuery(QueryType.INSERT, query, []);
+      tablePromises.push(db.executeQuery(QueryType.INSERT, query, []));
     });
 
+    // If we are in test mode, then add fake value to the database
     if (isTest) {
-      // Populate the database with test values
-      datasetQueries.forEach(function (query) {
-        db.executeQuery(QueryType.INSERT, query, []);
+      Promise.all(tablePromises).then(() => {
+        datasetQueries.forEach(function (query) {
+          db.executeQuery(QueryType.INSERT, query, []);
+        });
       });
     }
 
