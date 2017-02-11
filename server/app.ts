@@ -1,6 +1,7 @@
-import 'express';
+import * as Express from 'express';
 import { ServerLoader, IServerLifecycle } from 'ts-express-decorators';
 import Path = require('path');
+import { Exception } from 'ts-httpexceptions';
 
 export class Server extends ServerLoader implements IServerLifecycle {
   /**
@@ -43,6 +44,26 @@ export class Server extends ServerLoader implements IServerLifecycle {
 
   public $onServerInitError(err) {
     console.error(err);
+  }
+
+  public $onError(error: any, request: Express.Request, response: Express.Response, next: Function): void {
+
+    if (response.headersSent) {
+      return next(error);
+    }
+
+    if (error instanceof Exception) {
+      response.status(error.status).send({message: error.message});
+      return next();
+    }
+
+    if (typeof error === 'string') {
+      response.status(404).send({message: error});
+      return next();
+    }
+
+    response.status(error.status || 500).send({message: 'Internal Error'});
+    return next();
   }
 }
 

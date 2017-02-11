@@ -9,9 +9,9 @@
     "build": "npm run clean && npm run build-server && ng build",
     "build-server": "tsc -p server",
     "front": "ng serve",
-    "server": "npm run build-server && node dist/server/app.js",
+    "server": "export NODE_ENV=dev && npm run build-server && node dist/server/app.js",
     "lint": "tslint \"src/**/*.ts\" \"server/**/*.ts\"",
-    "back-test": "npm run build-server && mocha dist/server/**/*.spec.js",
+    "back-test": "export NODE_ENV=test && npm run build-server && mocha dist/server/**/*.spec.js",
     "front-test": "ng test --watch=false --code-coverage",
     "test": "npm run back-test && npm run front-test",
     "clean": "rm -rf dist coverage && npm cache clean",
@@ -33,8 +33,9 @@
     "express": "^4.14.0",
     "rxjs": "^5.0.1",
     "sqlite3": "^3.1.8",
-    "ts-express-decorators": "^1.3.0-7",
+    "ts-express-decorators": "^1.3.2",
     "ts-helpers": "^1.1.1",
+    "ts-httpexceptions": "^2.1.3",
     "zone.js": "^0.7.2"
   },
   "devDependencies": {

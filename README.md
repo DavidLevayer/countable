@@ -8,6 +8,10 @@
 4. [License](#license)
 5. [Contributions](#contributions)
 
+Additional documentation:
+
+[Back-end full documentation](./docs/backend.md)
+
 ## Overview
 
 Project status: :construction:**under development** :construction:.
@@ -31,7 +35,7 @@ Frontend:
 ## Functionnalities
 
 List of planned functionality:
-- [ ] Create and manage accounts
+- [x] Create and manage accounts
 - [ ] Create and manage categories
 - [ ] Create and manage subcategories
 - [ ] Standard transactions (incomes/expenses)
@@ -48,6 +52,8 @@ List of developer features:
 - [ ] Backend code coverage tool
 - [ ] Integrate online code coverage tool
 - [ ] End-to-end (e2e) tests
+- [ ] Docker integration
+- [ ] API Swagger
 
 ## Main commands
 
