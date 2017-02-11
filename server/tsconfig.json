@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "../dist/server",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "types": [
+      "reflect-metadata"
+    ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": [
+    "./**/*.ts"
+  ]
+}

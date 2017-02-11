@@ -1,0 +1,23 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - '6.9.5'
+
+notifications:
+  email: false
+
+before_install:
+- npm i -g npm@3.10.10
+
+install:
+- npm install
+
+before_script:
+
+script:
+- npm run lint
+- npm test
+
+after_script:
+- npm run build
