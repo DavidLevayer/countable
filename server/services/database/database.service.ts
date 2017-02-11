@@ -15,7 +15,7 @@ export class DatabaseService {
 
     if (isTest) {
       // Run temporary 'in-memory' database
-      db = new SQLiteConnector(':memory:', true);
+      db = new SQLiteConnector(':memory:', false);
     } else {
       // Use SQLite file as database
       db = new SQLiteConnector('./countable-database.sqlite', true);
