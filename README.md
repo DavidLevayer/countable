@@ -8,6 +8,8 @@
 4. [License](#license)
 5. [Contributions](#contributions)
 
+* [Back-end full documentation](./docs/backend.md)
+
 ## Overview
 
 Project status: :construction:**under development** :construction:.
@@ -49,6 +51,7 @@ List of developer features:
 - [ ] Integrate online code coverage tool
 - [ ] End-to-end (e2e) tests
 - [ ] Docker integration
+- [ ] API Swagger
 
 ## Main commands
 
