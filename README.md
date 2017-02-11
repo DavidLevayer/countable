@@ -8,7 +8,9 @@
 4. [License](#license)
 5. [Contributions](#contributions)
 
-* [Back-end full documentation](./docs/backend.md)
+Additional documentation:
+
+[Back-end full documentation](./docs/backend.md)
 
 ## Overview
 
@@ -33,7 +35,7 @@ Frontend:
 ## Functionnalities
 
 List of planned functionality:
-- [ ] Create and manage accounts
+- [x] Create and manage accounts
 - [ ] Create and manage categories
 - [ ] Create and manage subcategories
 - [ ] Standard transactions (incomes/expenses)
