@@ -3,10 +3,11 @@
 [![Build Status](https://travis-ci.org/DavidLevayer/countable.svg?branch=develop)](https://travis-ci.org/DavidLevayer/countable)
 
 1. [Overview](#overview)  
-2. [Functionnalities](#functionnalities)  
-3. [Main commands](#main-commands)  
-4. [License](#license)
-5. [Contributions](#contributions)
+2. [Requierements](#requierements)
+3. [Functionnalities](#functionnalities)  
+4. [Main commands](#main-commands)  
+5. [License](#license)
+6. [Contributions](#contributions)
 
 Additional documentation:
 
@@ -31,6 +32,13 @@ Frontend:
 * Jasmine and Karma (unit tests)
 * TSLint and CodeLyzer (code quality)
 * Webpack (build)
+
+## Requierements
+
+| Dependency | Version           |
+|------------|-------------------|
+| nodejs     | 6.9.5 or higher   |
+| npm        | 3.10.10 or higher |
 
 ## Functionnalities
 
