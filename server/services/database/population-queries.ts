@@ -27,4 +27,13 @@ const accountDataset: string[] = [
   'INSERT INTO Account VALUES (3, \'test-account3\');'
 ];
 
-export const datasetQueries: string[] = accountDataset;
+const categoryDataset: string[] = [
+  'INSERT INTO Category VALUES(1, \'test-cat1\');',
+  'INSERT INTO Category VALUES(2, \'test-cat2\');',
+  'INSERT INTO Category VALUES(3, \'test-cat3\');',
+  'INSERT INTO Subcategory VALUES(1, \'test-subcat-1.1\', 1);',
+  'INSERT INTO Subcategory VALUES(2, \'test-subcat-1.2\', 1);',
+  'INSERT INTO Subcategory VALUES(3, \'test-subcat-2.1\', 2);'
+];
+
+export const datasetQueries: string[] = accountDataset.concat(categoryDataset);
