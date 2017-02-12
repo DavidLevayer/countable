@@ -13,7 +13,7 @@ const subcategoryTableQuery: string =
   'id INTEGER PRIMARY KEY,' +
   'name TEXT NOT NULL UNIQUE,' +
   'refCategory INTEGER NOT NULL,' +
-  'FOREIGN KEY(refCategory) REFERENCES Category(categoryId));';
+  'FOREIGN KEY(refCategory) REFERENCES Category(id));';
 
 export const populationQueries: string[] = [
   accountTableQuery,
