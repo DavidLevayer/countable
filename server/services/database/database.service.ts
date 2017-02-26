@@ -11,7 +11,7 @@ export class DatabaseService {
   constructor() {
 
     let db: IDatabaseConnector;
-    let isTest: boolean = process.env.NODE_ENV === 'test';
+    let isTest: boolean = process.env.NODE_ENV.trim() === 'test';
 
     if (isTest) {
       // Run temporary 'in-memory' database
