@@ -6,7 +6,7 @@ export class Category {
   id: number;
   @JsonProperty()
   name: string;
-  @JsonProperty()
+  @JsonProperty({use: Subcategory})
   subcategories: Subcategory[] = [];
 
   constructor(id?: number, name?: string) {
