@@ -56,7 +56,25 @@ export class CategoryService implements CrudService {
 
   create(category: Category): Promise<Category> {
 
-    return null;
+    const query = 'INSERT INTO Category (name) VALUES (?);';
+    let insertedId: number;
+
+    return this.databaseService.insert(query, category.name).then(id => {
+      insertedId = id;
+      let subquery = 'INSERT INTO Subcategory (name, refCategory) VALUES ';
+
+      let params: String[] = [];
+      category.subcategories.forEach((subCategory: Subcategory) => {
+        subquery += '(?, ?),';
+        params.push(subCategory.name);
+        params.push(String(insertedId));
+      });
+
+      subquery = subquery.substr(0, subquery.length - 1).concat(';');
+      return this.databaseService.insert(subquery, ...params);
+    }).then(() => {
+      return this.get(insertedId);
+    });
   }
 
   update(category: Category): Promise<Category> {
