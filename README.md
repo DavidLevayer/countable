@@ -75,6 +75,9 @@ List of developer features:
 * `npm run back-test` Start backend unit tests
 * `npm run lint` Start linter
 
+> :warning: On Windows, you may need to replace 'export' keywords by 'set'. Otherwise, commands like `npm start` or `npm test` 
+may not work as expected.
+
 ## License
 
 MIT
