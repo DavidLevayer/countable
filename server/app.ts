@@ -39,7 +39,9 @@ export class Server extends ServerLoader implements IServerLifecycle {
   }
 
   public $onReady() {
+    /* tslint:disable:no-console */
     console.log('Server started on port 9876...');
+    /* tslint:enable:no-console */
   }
 
   public $onServerInitError(err) {

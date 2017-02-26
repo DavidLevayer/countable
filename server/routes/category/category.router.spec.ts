@@ -40,7 +40,6 @@ class CategoryTest {
       res.should.have.status(200);
       res.body.should.be.a('array');
       res.body.should.have.length(1);
-      console.log(res.body[0]);
       res.body[ 0 ].should.have.property('id').eql(2);
       res.body[ 0 ].should.have.property('name').eql('test-cat2');
       res.body[ 0 ].should.have.property('subcategories');
