@@ -65,6 +65,7 @@ export class Server extends ServerLoader implements IServerLifecycle {
     }
 
     response.status(error.status || 500).send({message: 'Internal Error'});
+    console.error(error);
     return next();
   }
 }
