@@ -11,8 +11,9 @@ const categoryTableQuery: string =
 const subcategoryTableQuery: string =
   'CREATE TABLE IF NOT EXISTS Subcategory(' +
   'id INTEGER PRIMARY KEY,' +
-  'name TEXT NOT NULL UNIQUE,' +
+  'name TEXT NOT NULL,' +
   'refCategory INTEGER NOT NULL,' +
+  'UNIQUE (name, refCategory),' +
   'FOREIGN KEY(refCategory) REFERENCES Category(id));';
 
 export const populationQueries: string[] = [
