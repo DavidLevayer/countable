@@ -172,4 +172,24 @@ class CategoryTest {
       done();
     });
   }
+
+  @test 'should delete a category'(done) {
+
+    chai.request(app).delete('/api/v1/category/2').end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('object');
+      res.body.should.have.property('success').eql(true);
+      done();
+    });
+  }
+
+  @test 'should not delete a category with unknown id'(done) {
+
+    chai.request(app).delete('/api/v1/category/12').end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('object');
+      res.body.should.have.property('success').eql(false);
+      done();
+    });
+  }
 }

@@ -90,4 +90,14 @@ class CategoryServiceTest {
       done();
     });
   }
+
+  @test 'should delete a category'(done) {
+    let expectedRes = true;
+    this.databaseServiceMock.toReturn = expectedRes;
+
+    this.service.delete(123).then((res) => {
+      expect(res).to.eql(expectedRes);
+      done();
+    });
+  }
 }
