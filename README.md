@@ -44,8 +44,8 @@ Frontend:
 
 List of planned functionality:
 - [x] Create and manage accounts
-- [ ] Create and manage categories
-- [ ] Create and manage subcategories
+- [x] Create and manage categories
+- [x] Create and manage subcategories
 - [ ] Standard transactions (incomes/expenses)
 - [ ] Account-to-account transactions
 - [ ] Dashboard
