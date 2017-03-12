@@ -9,10 +9,6 @@
 5. [License](#license)
 6. [Contributions](#contributions)
 
-Additional documentation:
-
-[Back-end full documentation](./docs/backend.md)
-
 ## Overview
 
 Project status: :construction:**under development** :construction:.
