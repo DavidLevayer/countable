@@ -9,7 +9,7 @@ export class AccountService implements CrudService {
   constructor(private databaseService: DatabaseService) {
   }
 
-  get(objectId: number): Promise<Account> {
+  get(objectId: number): Promise<Account[]> {
 
     const query = 'SELECT * FROM Account WHERE id = ?;';
     return this.databaseService.select(query, objectId);
