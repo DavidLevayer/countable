@@ -16,10 +16,21 @@ const subcategoryTableQuery: string =
   'UNIQUE (name, refCategory),' +
   'FOREIGN KEY(refCategory) REFERENCES Category(id));';
 
+const transactionTableQuery: string =
+  'CREATE TABLE IF NOT EXISTS MoneyTransaction(' +
+  'id INTEGER PRIMARY KEY,' +
+  'amount INTEGER NOT NULL,' +
+  'transactionDate DATETIME NOT NULL,' +
+  'refAccount INTEGER NOT NULL,' +
+  'refSubcategory INTEGER NOT NULL,' +
+  'FOREIGN KEY(refAccount) REFERENCES Account(id),' +
+  'FOREIGN KEY(refSubcategory) REFERENCES Subcategory(id));';
+
 export const populationQueries: string[] = [
   accountTableQuery,
   categoryTableQuery,
-  subcategoryTableQuery
+  subcategoryTableQuery,
+  transactionTableQuery
 ];
 
 const accountDataset: string[] = [
