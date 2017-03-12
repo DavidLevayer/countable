@@ -13,6 +13,8 @@ export class Transaction {
   subcategory: Subcategory;
   @JsonProperty({ use: Account })
   account: Account;
+  parentCategoryId: number;
+  parentCategoryName: string;
 
   constructor(id?: number, amount?: number) {
     this.id = id;
