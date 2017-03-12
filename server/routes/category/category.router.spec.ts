@@ -121,4 +121,55 @@ class CategoryTest {
       done();
     });
   }
+
+  @test 'should update a category'(done) {
+
+    let params: any = { name: 'test-cat3-update', subcategories: [ { name: 'subcat1' }, { name: 'subcat2' } ] };
+    let expectedRes: any = {
+      id: 3,
+      name: 'test-cat3-update',
+      subcategories: [ { id: 6, name: 'subcat1' }, { id: 7, name: 'subcat2' } ]
+    };
+
+    chai.request(app).put('/api/v1/category/3').send(params).end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('array');
+      res.body.should.have.length(1);
+      res.body[ 0 ].should.eql(expectedRes);
+      done();
+    });
+  }
+
+  @test 'should not update a category if name is missing'(done) {
+
+    let params: any = { category: 'update category' };
+
+    chai.request(app).put('/api/v1/category/4').send(params).end((err, res) => {
+      res.should.have.status(400);
+      res.body.should.have.property('message').eql('Parameter request.body.name is required');
+      done();
+    });
+  }
+
+  @test 'should not update a category if name is already used'(done) {
+
+    let params: any = { name: 'test-cat1' };
+
+    chai.request(app).put('/api/v1/category/3').send(params).end((err, res) => {
+      res.should.have.status(400);
+      res.body.should.have.property('message').eql('Category name \'test-cat1\' is already used');
+      done();
+    });
+  }
+
+  @test 'should not update a category if subcategories are duplicated'(done) {
+
+    let params: any = { name: 'category with duplicates', subcategories: [ { name: 'subcat1' }, { name: 'subcat1' } ] };
+
+    chai.request(app).put('/api/v1/category/3').send(params).end((err, res) => {
+      res.should.have.status(400);
+      res.body.should.have.property('message').eql('Parameter request.body.subcategories is invalid: duplicated subcategory names');
+      done();
+    });
+  }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Response, PathParams, BodyParams, Post } from 'ts-express-decorators';
+import { Controller, Get, Response, PathParams, BodyParams, Post, Put } from 'ts-express-decorators';
 import { BasicRouter } from '../basic.router';
 import * as Express from 'express';
 import { CategoryService } from '../../services/category/category.service';
@@ -55,15 +55,32 @@ export class CategoryRouter extends BasicRouter {
       return this.categoryService.create(category).then((rows) => {
         res.json(rows);
       }).catch((err: Error) => {
+        this.handleError(res, err, category);
+      });
+    }
+  }
 
-        if (err.message === CategoryRouter.ERR_CATEGORY_NAME) {
-          // Given category name is already used
-          this.throwError(res, 'Category name \'' + category.name + '\' is already used', 400);
-        } else {
-          // Internal error
-          this.logError(err.message, err.stack);
-          this.throwError(res, 'An error has occured while creating category \'' + category.name + '\'');
-        }
+  @Put('/:id')
+  public update(@PathParams('id') id: number, @BodyParams() category: Category, @Response() res: Express.Response) {
+
+    if (isUndefined(category.name) || category.name.length === 0) {
+      // No category name is specified
+      this.throwError(res, 'Parameter request.body.name is required', 400);
+    } else {
+      // Check if subcategories are valid
+      if (this.hasDuplicatedSubcategory(category)) {
+        this.throwError(res, 'Parameter request.body.subcategories is invalid: duplicated subcategory names', 400);
+        return;
+      }
+
+      // Override an eventual category id: route parameter has priority
+      category.id = id;
+
+      // Update category
+      return this.categoryService.update(category).then((rows) => {
+        res.json(rows);
+      }).catch((err: Error) => {
+        this.handleError(res, err, category);
       });
     }
   }
@@ -79,5 +96,21 @@ export class CategoryRouter extends BasicRouter {
       return subcategory.name;
     });
     return subcategoriesNames.length !== new Set(subcategoriesNames).size;
+  }
+
+  /**
+   * Handles common category errors
+   * @param res the Response object to notify
+   * @param category the category to test
+   */
+  private handleError(res: Express.Response, err: Error, category: Category) {
+    if (err.message === CategoryRouter.ERR_CATEGORY_NAME) {
+      // Given category name is already used
+      this.throwError(res, 'Category name \'' + category.name + '\' is already used', 400);
+    } else {
+      // Internal error
+      this.logError(err.message, err.stack);
+      this.throwError(res, 'An error has occured while creating category \'' + category.name + '\'');
+    }
   }
 }

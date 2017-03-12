@@ -72,4 +72,22 @@ class CategoryServiceTest {
       done();
     });
   }
+
+  @test 'should update a category'(done) {
+
+    this.databaseServiceMock.toReturn = [
+      { catId: 1, catName: 'category-update', subId: 11, subName: 'sub1' }
+    ];
+
+    let category: Category = new Category(1, 'category-update');
+    let subCategory: Subcategory = new Subcategory(11, 'sub1');
+    category.subcategories = [ subCategory ];
+    let expectedRes = [ category ];
+
+    this.service.update(category).then((res) => {
+      expect(res).to.be.a('array');
+      expect(res).to.eql(expectedRes);
+      done();
+    });
+  }
 }

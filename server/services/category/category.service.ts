@@ -61,17 +61,7 @@ export class CategoryService implements CrudService {
 
     return this.databaseService.insert(query, category.name).then(id => {
       insertedId = id;
-      let subquery = 'INSERT INTO Subcategory (name, refCategory) VALUES ';
-
-      let params: String[] = [];
-      category.subcategories.forEach((subCategory: Subcategory) => {
-        subquery += '(?, ?),';
-        params.push(subCategory.name);
-        params.push(String(insertedId));
-      });
-
-      subquery = subquery.substr(0, subquery.length - 1).concat(';');
-      return this.databaseService.insert(subquery, ...params);
+      return this.insertSubcategories(insertedId, category);
     }).then(() => {
       return this.get(insertedId);
     });
@@ -79,11 +69,45 @@ export class CategoryService implements CrudService {
 
   update(category: Category): Promise<Category> {
 
-    return null;
+    const query = 'UPDATE Category SET name = ? WHERE id = ?;';
+    return this.databaseService.update(query, category.name, category.id).then(() => {
+      // Remove all existing subcategories
+      return this.deleteSubcategories(category.id);
+    }).then(() => {
+      // Add update subcategories
+      return this.insertSubcategories(category.id, category);
+    }).then(() => {
+      // Return newly updated category
+      return this.get(category.id);
+    });
   }
 
   delete(id: number): Promise<boolean> {
 
-    return null;
+    return this.deleteSubcategories(id).then(() => {
+      const query = 'DELETE FROM Category WHERE id = ?;';
+      return this.databaseService.delete(query, id).then((changes: number) => {
+        return changes > 0;
+      });
+    });
+  }
+
+  private insertSubcategories(categoryId: number, category: Category): Promise<number> {
+    let subquery = 'INSERT INTO Subcategory (name, refCategory) VALUES ';
+
+    let params: String[] = [];
+    category.subcategories.forEach((subCategory: Subcategory) => {
+      subquery += '(?, ?),';
+      params.push(subCategory.name);
+      params.push(String(categoryId));
+    });
+
+    subquery = subquery.substr(0, subquery.length - 1).concat(';');
+    return this.databaseService.insert(subquery, ...params);
+  }
+
+  private deleteSubcategories(categoryId: number): Promise<boolean> {
+    const query = 'DELETE FROM Subcategory WHERE refCategory = ?;';
+    return this.databaseService.delete(query, categoryId);
   }
 }
