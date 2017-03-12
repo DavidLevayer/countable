@@ -3,10 +3,11 @@
 [![Build Status](https://travis-ci.org/DavidLevayer/countable.svg?branch=develop)](https://travis-ci.org/DavidLevayer/countable)
 
 1. [Overview](#overview)  
-2. [Functionnalities](#functionnalities)  
-3. [Main commands](#main-commands)  
-4. [License](#license)
-5. [Contributions](#contributions)
+2. [Requierements](#requierements)
+3. [Functionnalities](#functionnalities)  
+4. [Main commands](#main-commands)  
+5. [License](#license)
+6. [Contributions](#contributions)
 
 Additional documentation:
 
@@ -32,12 +33,19 @@ Frontend:
 * TSLint and CodeLyzer (code quality)
 * Webpack (build)
 
+## Requierements
+
+| Dependency | Version           |
+|------------|-------------------|
+| nodejs     | 6.9.5 or higher   |
+| npm        | 3.10.10 or higher |
+
 ## Functionnalities
 
 List of planned functionality:
 - [x] Create and manage accounts
-- [ ] Create and manage categories
-- [ ] Create and manage subcategories
+- [x] Create and manage categories
+- [x] Create and manage subcategories
 - [ ] Standard transactions (incomes/expenses)
 - [ ] Account-to-account transactions
 - [ ] Dashboard
@@ -66,6 +74,9 @@ List of developer features:
 * `npm run front-test` Start frontend unit tests
 * `npm run back-test` Start backend unit tests
 * `npm run lint` Start linter
+
+> :warning: On Windows, you may need to replace 'export' keywords by 'set'. Otherwise, commands like `npm start` or `npm test` 
+may not work as expected.
 
 ## License
 

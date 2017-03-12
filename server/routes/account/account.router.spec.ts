@@ -132,7 +132,7 @@ class AccountTest {
     });
   }
 
-  @test 'should not delete an account with unknow id'(done) {
+  @test 'should not delete an account with unknown id'(done) {
 
     chai.request(app).delete('/api/v1/account/5').end((err, res) => {
       res.should.have.status(200);
