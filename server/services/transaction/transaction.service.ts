@@ -61,7 +61,7 @@ export class TransactionService implements CrudService {
       let transaction: Transaction = new Transaction();
       transaction.id = row.transactionId;
       transaction.amount = row.amount;
-      transaction.date = row.transactionDate;
+      transaction.date = new Date(row.transactionDate);
       transaction.account = account;
       transaction.subcategory = subcategory;
       transaction.parentCategoryId = +row.categoryId;
