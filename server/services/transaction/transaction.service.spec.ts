@@ -9,7 +9,7 @@ import { Subcategory } from '../../models/category/subcategory';
 let chai = require('chai');
 let expect = chai.expect;
 
-@suite('Category service')
+@suite('Transaction service')
 class TransactionServiceTest {
 
   private service: TransactionService;
@@ -38,6 +38,18 @@ class TransactionServiceTest {
     let expectedRes = [ this.getTransactionMock() ];
 
     this.service.get(1).then((res) => {
+      expect(res).to.be.a('array');
+      expect(res).to.eql(expectedRes);
+      done();
+    });
+  }
+
+  @test 'should create a transaction'(done) {
+
+    this.databaseServiceMock.toReturn = [ this.getRawTransactionMock() ];
+    let expectedRes = [ this.getTransactionMock() ];
+
+    this.service.create(this.getTransactionMock()).then((res) => {
       expect(res).to.be.a('array');
       expect(res).to.eql(expectedRes);
       done();

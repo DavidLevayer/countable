@@ -35,9 +35,19 @@ export class TransactionService implements CrudService {
     });
   }
 
-  create(category: Transaction): Promise<Transaction> {
+  create(transaction: Transaction): Promise<Transaction[]> {
 
-    return null;
+    const query = 'INSERT INTO Transaction (amount, refAccount, refSubcategory, transactionDate) VALUES (?,?,?,?);';
+
+    return this.databaseService.insert(
+      query,
+      transaction.amount,
+      transaction.account.id,
+      transaction.subcategory.id,
+      transaction.date
+    ).then(id => {
+      return this.get(id);
+    });
   }
 
   update(category: Transaction): Promise<Transaction> {
