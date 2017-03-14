@@ -68,6 +68,16 @@ class TransactionServiceTest {
     });
   }
 
+  @test 'should delete a transaction'(done) {
+    let expectedRes = true;
+    this.databaseServiceMock.toReturn = expectedRes;
+
+    this.service.delete(123).then((res) => {
+      expect(res).to.eql(expectedRes);
+      done();
+    });
+  }
+
   private getRawTransactionMock(): any {
     return {
       transactionId: 1,

@@ -67,7 +67,10 @@ export class TransactionService implements CrudService {
 
   delete(id: number): Promise<boolean> {
 
-    return null;
+    const query = 'DELETE FROM Transaction WHERE id = ?;';
+    return this.databaseService.delete(query, id).then((changes: number) => {
+      return changes > 0;
+    });
   }
 
   private buildTransaction(rows: any): Transaction[] {
