@@ -56,6 +56,18 @@ class TransactionServiceTest {
     });
   }
 
+  @test 'should update a transaction'(done) {
+
+    this.databaseServiceMock.toReturn = [ this.getRawTransactionMock() ];
+    let expectedRes = [ this.getTransactionMock() ];
+
+    this.service.update(this.getTransactionMock()).then((res) => {
+      expect(res).to.be.a('array');
+      expect(res).to.eql(expectedRes);
+      done();
+    });
+  }
+
   private getRawTransactionMock(): any {
     return {
       transactionId: 1,

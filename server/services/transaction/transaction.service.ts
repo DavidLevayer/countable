@@ -50,9 +50,19 @@ export class TransactionService implements CrudService {
     });
   }
 
-  update(category: Transaction): Promise<Transaction> {
+  update(transaction: Transaction): Promise<Transaction[]> {
 
-    return null;
+    const query = 'UPDATE Transaction SET amount = ?, refAccount = ?, refSubcategory = ?, transactionDate = ? WHERE id = ?;';
+
+    return this.databaseService.update(
+      query,
+      transaction.amount,
+      transaction.account.id,
+      transaction.subcategory.id,
+      transaction.date
+    ).then(id => {
+      return this.get(id);
+    });
   }
 
   delete(id: number): Promise<boolean> {
