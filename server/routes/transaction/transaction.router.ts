@@ -1,7 +1,10 @@
-import { Controller, Get, Response, PathParams } from 'ts-express-decorators';
+import { Controller, Get, Response, PathParams, BodyParams, Post } from 'ts-express-decorators';
 import { BasicRouter } from '../basic.router';
 import * as Express from 'express';
 import { TransactionService } from '../../services/transaction/transaction.service';
+import { Transaction } from '../../models/transaction/transaction';
+import { isUndefined } from 'util';
+import { isDate } from 'rxjs/util/isDate';
 
 @Controller('/transaction')
 export class TransactionRouter extends BasicRouter {
@@ -30,5 +33,27 @@ export class TransactionRouter extends BasicRouter {
       this.logError(err);
       this.throwError(res, 'An error has occured while getting transaction ' + id);
     });
+  }
+
+  @Post('/')
+  public create(@BodyParams() transaction: Transaction, @Response() res: Express.Response) {
+
+    if (isUndefined(transaction.amount)) {
+      // No transaction name is specified
+      this.throwError(res, 'Parameter request.body.amount is required', 400);
+    } else if (isUndefined(transaction.date)) {
+      // No transaction name is specified
+      this.throwError(res, 'Parameter request.body.date is required', 400);
+    } else {
+
+      // Create a new transaction
+      return this.transactionService.create(transaction).then((rows) => {
+        res.json(rows);
+      }).catch((err: Error) => {
+        // Internal error
+        this.logError(err.message, err.stack);
+        this.throwError(res, 'An error has occured while creating transaction');
+      });
+    }
   }
 }
