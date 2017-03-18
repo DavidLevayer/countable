@@ -22,7 +22,7 @@ class AccountTest {
     chai.request(app).get('/api/v1/account').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('array');
-      res.body.should.have.length(3);
+      res.body.should.have.length(4);
       res.body[ 0 ].should.have.property('id').eql(1);
       res.body[ 0 ].should.have.property('name').eql('test-account1');
       done();
@@ -64,7 +64,7 @@ class AccountTest {
   @test 'should create an account'(done) {
 
     let params: any = { name: 'new account' };
-    let expectedRes: any = { id: 4, name: 'new account' };
+    let expectedRes: any = { id: 12, name: 'new account' };
 
     chai.request(app).post('/api/v1/account/').send(params).end((err, res) => {
       res.should.have.status(200);
@@ -100,9 +100,9 @@ class AccountTest {
   @test 'should update an account'(done) {
 
     let params: any = { name: 'updated account' };
-    let expectedRes: any = { id: 2, name: 'updated account' };
+    let expectedRes: any = { id: 11, name: 'updated account' };
 
-    chai.request(app).put('/api/v1/account/2').send(params).end((err, res) => {
+    chai.request(app).put('/api/v1/account/11').send(params).end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('array');
       res.body.should.have.length(1);
@@ -115,7 +115,7 @@ class AccountTest {
 
     let params: any = { name: 'test-account1' };
 
-    chai.request(app).put('/api/v1/account/2').send(params).end((err, res) => {
+    chai.request(app).put('/api/v1/account/11').send(params).end((err, res) => {
       res.should.have.status(400);
       res.body.should.have.property('message').eql('Account name \'test-account1\' is already used');
       done();
@@ -124,7 +124,7 @@ class AccountTest {
 
   @test 'should delete an account'(done) {
 
-    chai.request(app).delete('/api/v1/account/2').end((err, res) => {
+    chai.request(app).delete('/api/v1/account/11').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('object');
       res.body.should.have.property('success').eql(true);
@@ -134,7 +134,7 @@ class AccountTest {
 
   @test 'should not delete an account with unknown id'(done) {
 
-    chai.request(app).delete('/api/v1/account/5').end((err, res) => {
+    chai.request(app).delete('/api/v1/account/99').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('object');
       res.body.should.have.property('success').eql(false);

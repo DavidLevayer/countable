@@ -36,16 +36,25 @@ export const populationQueries: string[] = [
 const accountDataset: string[] = [
   'INSERT INTO Account VALUES (1, \'test-account1\');',
   'INSERT INTO Account VALUES (2, \'test-account2\');',
-  'INSERT INTO Account VALUES (3, \'test-account3\');'
+  'INSERT INTO Account VALUES (10, \'test-account10\');',
+  'INSERT INTO Account VALUES (11, \'test-account11\');'
 ];
 
 const categoryDataset: string[] = [
   'INSERT INTO Category VALUES(1, \'test-cat1\');',
   'INSERT INTO Category VALUES(2, \'test-cat2\');',
-  'INSERT INTO Category VALUES(3, \'test-cat3\');',
+  'INSERT INTO Category VALUES(10, \'test-cat10\');',
+  'INSERT INTO Category VALUES(11, \'test-cat11\');',
   'INSERT INTO Subcategory VALUES(1, \'test-subcat-1.1\', 1);',
   'INSERT INTO Subcategory VALUES(2, \'test-subcat-1.2\', 1);',
-  'INSERT INTO Subcategory VALUES(3, \'test-subcat-2.1\', 2);'
+  'INSERT INTO Subcategory VALUES(10, \'test-subcat-2.1\', 2);',
+  'INSERT INTO Subcategory VALUES(11, \'test-subcat-2.1\', 2);'
 ];
 
-export const datasetQueries: string[] = accountDataset.concat(categoryDataset);
+const transactionDataset: string[] = [
+  'INSERT INTO MoneyTransaction VALUES(1, 10, \'2017-03-14T13:04:48.844Z\', 1, 1);',
+  'INSERT INTO MoneyTransaction VALUES(2, 20, \'2017-03-14T14:04:48.844Z\', 1, 1);',
+  'INSERT INTO MoneyTransaction VALUES(10, 30, \'2017-03-14T14:04:48.844Z\', 2, 2);'
+];
+
+export const datasetQueries: string[] = accountDataset.concat(categoryDataset).concat(transactionDataset);
