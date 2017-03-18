@@ -9,10 +9,6 @@
 5. [License](#license)
 6. [Contributions](#contributions)
 
-Additional documentation:
-
-[Back-end full documentation](./docs/backend.md)
-
 ## Overview
 
 Project status: :construction:**under development** :construction:.
@@ -46,7 +42,7 @@ List of planned functionality:
 - [x] Create and manage accounts
 - [x] Create and manage categories
 - [x] Create and manage subcategories
-- [ ] Standard transactions (incomes/expenses)
+- [x] Standard transactions (incomes/expenses)
 - [ ] Account-to-account transactions
 - [ ] Dashboard
 - [ ] Statistic tools and graphics
