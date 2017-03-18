@@ -59,9 +59,10 @@ export class TransactionService implements CrudService {
       transaction.amount,
       transaction.account.id,
       transaction.subcategory.id,
-      transaction.date.toISOString()
-    ).then(id => {
-      return this.get(id);
+      transaction.date.toISOString(),
+      transaction.id
+    ).then(() => {
+      return this.get(transaction.id);
     });
   }
 
