@@ -148,4 +148,26 @@ class TransactionTest {
       done();
     });
   }
+
+  @test 'should not update a transaction if amount is missing'(done) {
+
+    let params: any = { date: '2017-03-18T13:04:48.844Z', accountId: 1, subcategoryId: 1 };
+
+    chai.request(app).put('/api/v1/transaction/10').send(params).end((err, res) => {
+      res.should.have.status(400);
+      res.body.should.have.property('message').eql('Parameter request.body.amount is required');
+      done();
+    });
+  }
+
+  @test 'should not update a transaction if date is missing'(done) {
+
+    let params: any = { amount: 12, accountId: 1, subcategoryId: 1 };
+
+    chai.request(app).put('/api/v1/transaction/10').send(params).end((err, res) => {
+      res.should.have.status(400);
+      res.body.should.have.property('message').eql('Parameter request.body.date is required');
+      done();
+    });
+  }
 }
