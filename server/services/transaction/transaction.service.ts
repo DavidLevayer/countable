@@ -37,7 +37,7 @@ export class TransactionService implements CrudService {
 
   create(transaction: Transaction): Promise<Transaction[]> {
 
-    const query = 'INSERT INTO Transaction (amount, refAccount, refSubcategory, transactionDate) VALUES (?,?,?,?);';
+    const query = 'INSERT INTO MoneyTransaction (amount, refAccount, refSubcategory, transactionDate) VALUES (?,?,?,?);';
 
     return this.databaseService.insert(
       query,
@@ -52,7 +52,7 @@ export class TransactionService implements CrudService {
 
   update(transaction: Transaction): Promise<Transaction[]> {
 
-    const query = 'UPDATE Transaction SET amount = ?, refAccount = ?, refSubcategory = ?, transactionDate = ? WHERE id = ?;';
+    const query = 'UPDATE MoneyTransaction SET amount = ?, refAccount = ?, refSubcategory = ?, transactionDate = ? WHERE id = ?;';
 
     return this.databaseService.update(
       query,
@@ -67,7 +67,7 @@ export class TransactionService implements CrudService {
 
   delete(id: number): Promise<boolean> {
 
-    const query = 'DELETE FROM Transaction WHERE id = ?;';
+    const query = 'DELETE FROM MoneyTransaction WHERE id = ?;';
     return this.databaseService.delete(query, id).then((changes: number) => {
       return changes > 0;
     });
