@@ -170,4 +170,24 @@ class TransactionTest {
       done();
     });
   }
+
+  @test 'should delete a transaction'(done) {
+
+    chai.request(app).delete('/api/v1/transaction/10').end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('object');
+      res.body.should.have.property('success').eql(true);
+      done();
+    });
+  }
+
+  @test 'should not delete a transaction with unknown id'(done) {
+
+    chai.request(app).delete('/api/v1/transaction/99').end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('object');
+      res.body.should.have.property('success').eql(false);
+      done();
+    });
+  }
 }

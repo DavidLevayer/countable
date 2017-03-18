@@ -1,4 +1,4 @@
-import { Controller, Get, Response, PathParams, BodyParams, Post, Put } from 'ts-express-decorators';
+import { Controller, Get, Response, PathParams, BodyParams, Post, Put, Delete } from 'ts-express-decorators';
 import { BasicRouter } from '../basic.router';
 import * as Express from 'express';
 import { TransactionService } from '../../services/transaction/transaction.service';
@@ -80,5 +80,16 @@ export class TransactionRouter extends BasicRouter {
         this.throwError(res, 'An error has occured while updating transaction');
       });
     }
+  }
+
+  @Delete('/:id')
+  public delete(@PathParams('id') id: number, @Response() res: Express.Response) {
+
+    return this.transactionService.delete(id).then(success => {
+      res.json({success: success});
+    }).catch((err: Error) => {
+      this.logError(err.message, err.stack);
+      this.throwError(res, 'An error has occured while removing transaction ' + id);
+    });
   }
 }
