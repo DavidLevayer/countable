@@ -120,4 +120,32 @@ class TransactionTest {
       done();
     });
   }
+
+  @test 'should update a transaction'(done) {
+
+    let params: any = { id: 11, amount: 1050, date: '2017-03-20T13:04:48.844Z', account: { id: 1 }, subcategory: { id: 2 } };
+    let expectedRes: any = {
+      id: 10,
+      amount: 1050,
+      date: '2017-03-20T13:04:48.844Z',
+      account: {
+        id: 1,
+        name: 'test-account1'
+      },
+      subcategory: {
+        id: 2,
+        name: 'test-subcat-1.2'
+      },
+      parentCategoryId: 1,
+      parentCategoryName: 'test-cat1'
+    };
+
+    chai.request(app).put('/api/v1/transaction/10').send(params).end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('array');
+      res.body.should.have.length(1);
+      res.body[ 0 ].should.eql(expectedRes);
+      done();
+    });
+  }
 }
