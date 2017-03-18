@@ -44,7 +44,7 @@ export class TransactionService implements CrudService {
       transaction.amount,
       transaction.account.id,
       transaction.subcategory.id,
-      transaction.date
+      transaction.date.toISOString()
     ).then(id => {
       return this.get(id);
     });
@@ -59,7 +59,7 @@ export class TransactionService implements CrudService {
       transaction.amount,
       transaction.account.id,
       transaction.subcategory.id,
-      transaction.date
+      transaction.date.toISOString()
     ).then(id => {
       return this.get(id);
     });
