@@ -10,7 +10,7 @@ export class CategoryService implements CrudService {
   constructor(private databaseService: DatabaseService) {
   }
 
-  get(id: number): Promise<Category> {
+  get(id: number): Promise<Category[]> {
 
     const query = 'SELECT C.id as catId, C.name as catName, S.id as subId, S.name as subName ' +
       'FROM Category as C LEFT JOIN Subcategory as S ON C.id = S.refCategory WHERE C.id = ?;';

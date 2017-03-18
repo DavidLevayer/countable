@@ -5,4 +5,9 @@ export class Account {
   id: number;
   @JsonProperty()
   name: string;
+
+  constructor(id?: number, name?: string) {
+    this.id = id;
+    this.name = name;
+  }
 }
