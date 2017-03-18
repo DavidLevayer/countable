@@ -42,7 +42,7 @@ List of planned functionality:
 - [x] Create and manage accounts
 - [x] Create and manage categories
 - [x] Create and manage subcategories
-- [ ] Standard transactions (incomes/expenses)
+- [x] Standard transactions (incomes/expenses)
 - [ ] Account-to-account transactions
 - [ ] Dashboard
 - [ ] Statistic tools and graphics
