@@ -2,6 +2,7 @@ import * as Express from 'express';
 import { ServerLoader, IServerLifecycle } from 'ts-express-decorators';
 import Path = require('path');
 import { Exception } from 'ts-httpexceptions';
+import GlobalResponseMiddleware from './middlewares/global-response.middleware';
 
 export class Server extends ServerLoader implements IServerLifecycle {
   /**
@@ -33,7 +34,8 @@ export class Server extends ServerLoader implements IServerLifecycle {
       .use(bodyParser.json())
       .use(bodyParser.urlencoded({
         extended: false
-      }));
+      }))
+      .use(GlobalResponseMiddleware);
 
     return null;
   }
