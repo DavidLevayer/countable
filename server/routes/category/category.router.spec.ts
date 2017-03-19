@@ -81,7 +81,7 @@ class CategoryTest {
     };
 
     chai.request(app).post('/api/v1/category/').send(params).end((err, res) => {
-      res.should.have.status(200);
+      res.should.have.status(201);
       res.body.should.be.a('array');
       res.body.should.have.length(1);
       res.body[ 0 ].should.eql(expectedRes);
