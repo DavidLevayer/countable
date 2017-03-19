@@ -1,5 +1,5 @@
 import * as Express from 'express';
-import { IMiddleware, Middleware, Response } from "ts-express-decorators";
+import { IMiddleware, Middleware, Response } from 'ts-express-decorators';
 
 @Middleware()
 export default class GlobalResponseMiddleware implements IMiddleware {
