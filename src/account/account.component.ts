@@ -1,8 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Account } from './account';
+import { AccountService } from './account.service';
 
 @Component({
   selector: 'app-account',
-  template: '<h1>Account</h1>'
+  templateUrl: 'account.component.html',
+  styleUrls: ['../shared/scss/card.common.scss']
 })
-export class AccountComponent {
+export class AccountComponent implements OnInit {
+
+  accounts: Account[] = [];
+
+  constructor(private accountService: AccountService) {
+  }
+
+  ngOnInit(): void {
+    this.accountService.getAll().subscribe(res => this.accounts = res);
+  }
 }
