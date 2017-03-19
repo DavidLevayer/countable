@@ -12,7 +12,7 @@
     "server": "export NODE_ENV=dev && npm run build-server && node dist/server/app.js",
     "lint": "tslint \"src/**/*.ts\" \"server/**/*.ts\"",
     "back-test": "export NODE_ENV=test && npm run build-server && mocha dist/server/**/*.spec.js",
-    "front-test": "ng test --watch=false --code-coverage",
+    "front-test": "ng test --watch=false",
     "test": "npm run back-test && npm run front-test",
     "clean": "rm -rf dist coverage && npm cache clean",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
