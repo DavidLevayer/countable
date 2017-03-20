@@ -5,7 +5,11 @@ import { AccountService } from './account.service';
 @Component({
   selector: 'app-account',
   templateUrl: 'account.component.html',
-  styleUrls: ['../shared/scss/card.common.scss']
+  styleUrls: [
+    '../shared/scss/card.common.scss',
+    '../shared/scss/highlight.common.scss',
+    '../shared/scss/callout.common.scss'
+  ]
 })
 export class AccountComponent implements OnInit {
 
@@ -16,5 +20,8 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.getAll().subscribe(res => this.accounts = res);
+  }
+
+  create(): void {
   }
 }

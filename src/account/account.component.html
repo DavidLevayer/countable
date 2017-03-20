@@ -1,4 +1,15 @@
-<h1>List of Accounts</h1>
+<div class="header">
+  <div class="title inline">List of Accounts</div>
+</div>
+
+<div class="row col-lg-12 mb-3">
+  <div class="card highlight">
+    <div class="card-block">
+      <input class="form-control mr-sm-2 inline" type="text" placeholder="Enter account name...">
+      <button class="btn btn-success my-2 my-sm-0 inline" type="submit">Add</button>
+    </div>
+  </div>
+</div>
 
 <div class="row">
   <div *ngFor="let account of accounts" class="col-md-3 col-xs-6">
@@ -6,14 +17,6 @@
       <div class="card-block">
         <h4 class="card-title">{{account.name}}</h4>
         <h6 class="card-subtitle mb-2 text-muted">#{{account.id}}</h6>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-3 col-xs-6">
-    <div class="card card-outline-success fill-height">
-      <div class="card-block">
-        <button>Add account</button>
       </div>
     </div>
   </div>
