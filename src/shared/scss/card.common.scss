@@ -3,4 +3,11 @@
   &.fill-height {
     height: 100%;
   }
+
+  .footer > button {
+    float: right;
+    + button {
+      margin-right: 0.5rem;
+    }
+  }
 }
