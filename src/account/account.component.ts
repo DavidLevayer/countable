@@ -13,15 +13,35 @@ import { AccountService } from './account.service';
 })
 export class AccountComponent implements OnInit {
 
+  /** List of accounts */
   accounts: Account[] = [];
+  /** Name of the to-be-created account */
+  accountName = '';
+  /** Contains an eventual error */
+  error: string;
 
   constructor(private accountService: AccountService) {
   }
 
   ngOnInit(): void {
-    this.accountService.getAll().subscribe(res => this.accounts = res);
+    this.accountService.getAll().subscribe(
+      res => this.accounts = res,
+      err => this.error = err
+    );
   }
 
   create(): void {
+    if (this.accountName.length > 0) {
+      let account: Account = new Account();
+      account.name = this.accountName;
+      this.accountService.create(account).subscribe(res => {
+          if (res.length === 1) {
+            this.accounts.push(res[ 0 ]);
+          }
+          this.accountName = '';
+        },
+        err => this.error = err
+      );
+    }
   }
 }

@@ -2,17 +2,21 @@
   <div class="title inline">List of Accounts</div>
 </div>
 
-<div class="row col-lg-12 mb-3">
+<div *ngIf="error" class="bs-callout bs-callout-danger error">
+  <h4>Error</h4> {{error}}
+</div>
+
+<div class="row mb-3 ml-0 mr-0">
   <div class="card highlight">
     <div class="card-block">
-      <input class="form-control mr-sm-2 inline" type="text" placeholder="Enter account name...">
-      <button class="btn btn-success inline" type="submit">Add</button>
+      <input [(ngModel)]="accountName" class="form-control mr-sm-2 inline" type="text" placeholder="Enter account name...">
+      <button class="btn btn-success inline" type="submit" (click)="create()">Add</button>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <div *ngFor="let account of accounts" class="col-md-3 col-xs-6">
+  <div *ngFor="let account of accounts" class="col-md-3 col-xs-6 mb-3">
     <div class="card">
       <div class="card-block">
         <h4 class="card-title">{{account.name}}</h4>
