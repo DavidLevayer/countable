@@ -8,12 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from '../home/home.component';
 import { AccountComponent } from '../account/account.component';
 import { AccountService } from '../account/account.service';
+import { CategoryService } from '../category/category.service';
+import { CategoryComponent } from '../category/category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AccountComponent
+    AccountComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,10 @@ import { AccountService } from '../account/account.service';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ AccountService ],
+  providers: [
+    AccountService,
+    CategoryService
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {

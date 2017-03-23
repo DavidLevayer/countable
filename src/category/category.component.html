@@ -1,0 +1,36 @@
+<div class="header">
+  <div class="title inline">List of Categories</div>
+</div>
+
+<div *ngIf="error" class="bs-callout bs-callout-danger error">
+  <h4>Error</h4> {{error}}
+</div>
+
+<div class="row mb-3 ml-0 mr-0">
+  <div class="card highlight">
+    <div class="card-block">
+      <input [(ngModel)]="categoryName" class="form-control mr-sm-2 inline" type="text"
+             placeholder="Enter category name...">
+      <button class="btn btn-success inline" type="submit" (click)="create()">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div *ngFor="let category of categories" class="col-md-3 col-xs-6 mb-3">
+    <div class="card">
+      <div class="card-block">
+        <h6 class="card-subtitle mb-2 text-muted inline">#{{category.id}}</h6>
+        <h4 *ngIf="editingCategoryId !== category.id" class="card-title inline">{{category.name}}</h4>
+        <input *ngIf="editingCategoryId === category.id" [(ngModel)]="category.name"
+               class="form-control mr-sm-1 inline" type="text">
+        <button *ngIf="editingCategoryId === category.id" type="button"
+                class="btn btn-outline-success fa fa-check inline" (click)="update(category)"></button>
+      </div>
+      <div class="card-block footer">
+        <button type="button" class="btn btn-outline-danger" (click)="delete(category.id)">Delete</button>
+        <button type="button" class="btn btn-outline-info" (click)="toggleEdit(category.id)">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
