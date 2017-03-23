@@ -1,19 +1,35 @@
-<h1>List of Accounts</h1>
+<div class="header">
+  <div class="title inline">List of Accounts</div>
+</div>
 
-<div class="row">
-  <div *ngFor="let account of accounts" class="col-md-3 col-xs-6">
-    <div class="card">
-      <div class="card-block">
-        <h4 class="card-title">{{account.name}}</h4>
-        <h6 class="card-subtitle mb-2 text-muted">#{{account.id}}</h6>
-      </div>
+<div *ngIf="error" class="bs-callout bs-callout-danger error">
+  <h4>Error</h4> {{error}}
+</div>
+
+<div class="row mb-3 ml-0 mr-0">
+  <div class="card highlight">
+    <div class="card-block">
+      <input [(ngModel)]="accountName" class="form-control mr-sm-2 inline" type="text"
+             placeholder="Enter account name...">
+      <button class="btn btn-success inline" type="submit" (click)="create()">Add</button>
     </div>
   </div>
+</div>
 
-  <div class="col-md-3 col-xs-6">
-    <div class="card card-outline-success fill-height">
+<div class="row">
+  <div *ngFor="let account of accounts" class="col-md-3 col-xs-6 mb-3">
+    <div class="card">
       <div class="card-block">
-        <button>Add account</button>
+        <h6 class="card-subtitle mb-2 text-muted inline">#{{account.id}}</h6>
+        <h4 *ngIf="editingAccountId !== account.id" class="card-title inline">{{account.name}}</h4>
+        <input *ngIf="editingAccountId === account.id" [(ngModel)]="account.name"
+               class="form-control mr-sm-1 inline" type="text">
+        <button *ngIf="editingAccountId === account.id" type="button" class="btn btn-outline-success fa fa-check inline"
+                (click)="update(account)"></button>
+      </div>
+      <div class="card-block footer">
+        <button type="button" class="btn btn-outline-danger" (click)="delete(account.id)">Delete</button>
+        <button type="button" class="btn btn-outline-info" (click)="toggleEdit(account.id)">Edit</button>
       </div>
     </div>
   </div>
