@@ -35,4 +35,14 @@ export class AccountService extends BaseService {
     return this.http.post(this.baseUrl + this.accountUrl, account, { headers: this.baseHeaders })
       .map(this.extractArray).catch(this.extractError);
   }
+
+  /**
+   * Deletes given account
+   * @returns {Observable<boolean>}
+   */
+  public delete(accountId: number): Observable<boolean> {
+
+    return this.http.delete(this.baseUrl + this.accountUrl + '/' + accountId)
+      .map(this.extractSuccess).catch(this.extractError);
+  }
 }

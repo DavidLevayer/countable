@@ -26,4 +26,12 @@ export class BaseService {
     let body = res.json();
     return Observable.throw(body.message || 'Something went horribly wrong...');
   }
+
+  protected extractSuccess(res: Response) {
+    let body = res.json();
+    if (!body.success || typeof body.success !== 'boolean') {
+      return Observable.throw('Expected \'success: boolean\' field to be set.');
+    }
+    return body.success;
+  }
 }

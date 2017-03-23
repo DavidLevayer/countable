@@ -9,7 +9,8 @@
 <div class="row mb-3 ml-0 mr-0">
   <div class="card highlight">
     <div class="card-block">
-      <input [(ngModel)]="accountName" class="form-control mr-sm-2 inline" type="text" placeholder="Enter account name...">
+      <input [(ngModel)]="accountName" class="form-control mr-sm-2 inline" type="text"
+             placeholder="Enter account name...">
       <button class="btn btn-success inline" type="submit" (click)="create()">Add</button>
     </div>
   </div>
@@ -23,7 +24,7 @@
         <h6 class="card-subtitle mb-2 text-muted">#{{account.id}}</h6>
       </div>
       <div class="card-block footer">
-        <button type="button" class="btn btn-outline-danger">Delete</button>
+        <button type="button" class="btn btn-outline-danger" (click)="delete(account.id)">Delete</button>
         <button type="button" class="btn btn-outline-info">Edit</button>
       </div>
     </div>

@@ -44,4 +44,16 @@ export class AccountComponent implements OnInit {
       );
     }
   }
+
+  delete(id: number): void {
+    this.accountService.delete(id).subscribe(res => {
+        if (res) {
+          this.accounts = this.accounts.filter((account) => account.id !== id);
+        } else {
+          this.error = 'Cannot delete account #' + id + ': server returns failure status.';
+        }
+      },
+      err => this.error = err
+    );
+  }
 }
