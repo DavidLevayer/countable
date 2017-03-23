@@ -37,6 +37,16 @@ export class AccountService extends BaseService {
   }
 
   /**
+   * Updates an existing account
+   * @returns {Observable<Account>}
+   */
+  public update(account: Account): Observable<Account[]> {
+
+    return this.http.put(this.baseUrl + this.accountUrl + '/' + account.id, account, { headers: this.baseHeaders })
+      .map(this.extractArray).catch(this.extractError);
+  }
+
+  /**
    * Deletes given account
    * @returns {Observable<boolean>}
    */

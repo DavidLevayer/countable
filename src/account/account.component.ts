@@ -17,6 +17,8 @@ export class AccountComponent implements OnInit {
   accounts: Account[] = [];
   /** Name of the to-be-created account */
   accountName = '';
+  /** Id of the account we are currently editing */
+  editingAccountId = 0;
   /** Contains an eventual error */
   error: string;
 
@@ -45,6 +47,16 @@ export class AccountComponent implements OnInit {
     }
   }
 
+  update(account: Account): void {
+    if (this.editingAccountId >= 0) {
+      this.accountService.update(account).subscribe(() => {
+          this.editingAccountId = 0;
+        },
+        err => this.error = err
+      );
+    }
+  }
+
   delete(id: number): void {
     this.accountService.delete(id).subscribe(res => {
         if (res) {
@@ -55,5 +67,9 @@ export class AccountComponent implements OnInit {
       },
       err => this.error = err
     );
+  }
+
+  toggleEdit(id: number): void {
+    this.editingAccountId = id;
   }
 }
