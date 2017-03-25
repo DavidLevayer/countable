@@ -5,7 +5,7 @@ import { AccountComponent } from '../account/account.component';
 import { CategoryComponent } from '../category/category.component';
 
 const routes: Routes = [
-  { component: HomeComponent, path: '' },
+  { component: HomeComponent, path: 'home' },
   { component: AccountComponent, path: 'account' },
   { component: CategoryComponent, path: 'category' }
 ];
