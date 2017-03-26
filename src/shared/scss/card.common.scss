@@ -4,18 +4,18 @@
     height: 100%;
   }
 
-  .footer > button {
+  .inline {
+    display: inline-block;
+  }
+}
+
+.card-footer {
+  background: transparent;
+
+  > button {
     float: right;
     + button {
       margin-right: 0.5rem;
     }
-  }
-
-  .form-control {
-    width: 60%;
-  }
-
-  .inline {
-    display: inline-block;
   }
 }

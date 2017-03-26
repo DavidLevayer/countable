@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from './category';
 import { CategoryService } from './category.service';
+import { Subcategory } from './subcategory';
 
 @Component({
   selector: 'app-category',
@@ -17,6 +18,8 @@ export class CategoryComponent implements OnInit {
   categories: Category[] = [];
   /** Name of the to-be-created category */
   categoryName = '';
+  /** Name of the to-be-created subcategory */
+  subcategoryName = '';
   /** Id of the category we are currently editing */
   editingCategoryId = 0;
   /** Contains an eventual error */
@@ -41,6 +44,7 @@ export class CategoryComponent implements OnInit {
             this.categories.push(res[ 0 ]);
           }
           this.categoryName = '';
+          this.error = '';
         },
         err => this.error = err
       );
@@ -71,5 +75,22 @@ export class CategoryComponent implements OnInit {
 
   toggleEdit(id: number): void {
     this.editingCategoryId = id;
+  }
+
+  addSubcategory(category: Category): void {
+    if (this.subcategoryName.length > 0) {
+      let subcategory: Subcategory = new Subcategory();
+      subcategory.name = this.subcategoryName;
+
+      category.subcategories.push(subcategory);
+      this.subcategoryName = '';
+    }
+  }
+
+  removeSubcategory(category: Category, subcategory: Subcategory): void {
+
+    category.subcategories = category.subcategories.filter((sc) => {
+      return sc.name !== subcategory.name;
+    });
   }
 }
