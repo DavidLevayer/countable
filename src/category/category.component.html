@@ -16,53 +16,48 @@
   </div>
 </div>
 
-<div class="row">
-  <div *ngFor="let category of categories" class="col-md-3 col-xs-6 mb-3">
-    <div class="card">
+<div class="card-columns">
+  <div *ngFor="let category of categories" class="card">
 
-      <!-- Card header: contains category title -->
-      <div class="card-header">
-        <h4 *ngIf="editingCategoryId !== category.id" class="card-title inline">{{category.name}}</h4>
+    <div class="card-block">
 
-        <div *ngIf="editingCategoryId === category.id" class="d-flex flex-row">
-          <input [(ngModel)]="category.name"
-                 class="form-control mr-sm-1 inline" type="text">
-        </div>
+      <!-- Card title: contains category title -->
+      <h4 *ngIf="editingCategoryId !== category.id" class="card-title inline">{{category.name}}</h4>
+
+      <div *ngIf="editingCategoryId === category.id" class="d-flex flex-row">
+        <input [(ngModel)]="category.name"
+               class="form-control mr-sm-1 inline" type="text">
       </div>
 
-      <!-- Card body: contains subcategories -->
-      <div class="card-block">
-
-        <!-- List of subcategories -->
-        <div *ngFor="let subcategory of category.subcategories" class="mb-2">
-          <h6 class="inline">{{subcategory.name}}</h6>
-          <button *ngIf="editingCategoryId === category.id" type="button"
-                  class="btn float-right btn-outline-danger fa fa-times inline"
-                  (click)="removeSubcategory(category, subcategory)"></button>
-        </div>
-
-        <!-- Input used to add a new subcategory -->
-        <div *ngIf="editingCategoryId === category.id" class="d-flex flex-row">
-          <input [(ngModel)]="subcategoryName" class="form-control mr-sm-1 inline" type="text">
-          <button type="button" class="btn btn-outline-success fa fa-plus inline"
-                  (click)="addSubcategory(category)"></button>
-        </div>
-
-        <div class="d-flex flex-column mt-3">
-          <button *ngIf="editingCategoryId === category.id" type="button"
-                  class="btn btn-outline-success inline" (click)="update(category)">Save
-          </button>
-        </div>
-
+      <!-- List of subcategories -->
+      <div *ngFor="let subcategory of category.subcategories" class="mb-2">
+        <h6 class="inline">{{subcategory.name}}</h6>
+        <button *ngIf="editingCategoryId === category.id" type="button"
+                class="btn float-right btn-outline-danger fa fa-times inline"
+                (click)="removeSubcategory(category, subcategory)"></button>
       </div>
 
-      <div class="card-footer">
-        <button type="button" class="btn btn-outline-danger" (click)="delete(category.id)">Delete</button>
-        <button [disabled]="editingCategoryId === category.id" type="button" class="btn btn-outline-info"
-                (click)="toggleEdit(category.id)">Edit
+      <!-- Input used to add a new subcategory -->
+      <div *ngIf="editingCategoryId === category.id" class="d-flex flex-row">
+        <input [(ngModel)]="subcategoryName" class="form-control mr-sm-1 inline" type="text">
+        <button type="button" class="btn btn-outline-success fa fa-plus inline"
+                (click)="addSubcategory(category)"></button>
+      </div>
+
+      <div class="d-flex flex-column mt-3">
+        <button *ngIf="editingCategoryId === category.id" type="button"
+                class="btn btn-outline-success inline" (click)="update(category)">Save
         </button>
       </div>
 
     </div>
+
+    <div class="card-footer">
+      <button [disabled]="editingCategoryId === category.id" type="button" class="btn btn-outline-info"
+              (click)="toggleEdit(category.id)">Edit
+      </button>
+      <button type="button" class="btn btn-outline-danger" (click)="delete(category.id)">Delete</button>
+    </div>
+
   </div>
 </div>
