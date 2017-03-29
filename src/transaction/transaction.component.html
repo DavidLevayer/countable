@@ -1,0 +1,38 @@
+<div class="header">
+  <div class="title inline">List of Transactions</div>
+</div>
+
+<div *ngIf="error" class="bs-callout bs-callout-danger error">
+  <h4>Error</h4> {{error}}
+</div>
+
+<div class="row mb-3 ml-0 mr-0">
+  <div class="card highlight">
+    <div class="card-block">
+      TODO
+    </div>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Account</th>
+    <th>Category</th>
+    <th>Subcategory</th>
+    <th>Amount</th>
+    <th>Balance</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let transaction of transactions">
+    <td>{{transaction.date | date: 'short'}}</td>
+    <td>{{transaction.account.name}}</td>
+    <td>{{transaction.parentCategoryName}}</td>
+    <td>{{transaction.subcategory.name}}</td>
+    <td>{{transaction.amount}}</td>
+    <td>TODO</td>
+  </tr>
+  </tbody>
+</table>
