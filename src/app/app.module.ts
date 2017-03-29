@@ -10,13 +10,16 @@ import { AccountComponent } from '../account/account.component';
 import { AccountService } from '../account/account.service';
 import { CategoryService } from '../category/category.service';
 import { CategoryComponent } from '../category/category.component';
+import { TransactionComponent } from '../transaction/transaction.component';
+import { TransactionService } from '../transaction/transaction.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AccountComponent,
-    CategoryComponent
+    CategoryComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { CategoryComponent } from '../category/category.component';
   ],
   providers: [
     AccountService,
-    CategoryService
+    CategoryService,
+    TransactionService
   ],
   bootstrap: [ AppComponent ]
 })
