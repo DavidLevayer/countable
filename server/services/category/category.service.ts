@@ -61,7 +61,10 @@ export class CategoryService implements CrudService {
 
     return this.databaseService.insert(query, category.name).then(id => {
       insertedId = id;
-      return this.insertSubcategories(insertedId, category);
+      if (category.subcategories && category.subcategories.length > 0) {
+
+        return this.insertSubcategories(insertedId, category);
+      }
     }).then(() => {
       return this.get(insertedId);
     });
