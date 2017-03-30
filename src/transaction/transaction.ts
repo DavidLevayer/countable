@@ -15,5 +15,7 @@ export class Transaction {
     this.id = id;
     this.amount = amount;
     this.date = new Date();
+    this.account = new Account();
+    this.subcategory = new Subcategory();
   }
 }

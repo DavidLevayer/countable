@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from './transaction';
 import { TransactionService } from './transaction.service';
+import { AccountService } from '../account/account.service';
+import { CategoryService } from '../category/category.service';
+import { Account } from '../account/account';
+import { Category } from '../category/category';
 
 @Component({
   selector: 'app-transaction',
@@ -13,6 +17,10 @@ import { TransactionService } from './transaction.service';
 })
 export class TransactionComponent implements OnInit {
 
+  /** List of accounts */
+  accounts: Account[] = [];
+  /** List of categories */
+  categories: Category[] = [];
   /** List of transactions */
   transactions: Transaction[] = [];
   /** The to-be-created transaction */
@@ -22,10 +30,22 @@ export class TransactionComponent implements OnInit {
   /** Contains an eventual error */
   error: string;
 
-  constructor(private transactionService: TransactionService) {
+  constructor(private transactionService: TransactionService,
+              private accountService: AccountService,
+              private categoryService: CategoryService) {
   }
 
   ngOnInit(): void {
+    this.accountService.getAll().subscribe(
+      res => this.accounts = res,
+      err => this.error = err
+    );
+    this.categoryService.getAll().subscribe(
+      res => this.categories = res.filter((category) => {
+        return category.subcategories.length > 0;
+      }),
+      err => this.error = err
+    );
     this.transactionService.getAll().subscribe(
       res => this.transactions = res,
       err => this.error = err

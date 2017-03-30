@@ -9,7 +9,19 @@
 <div class="row mb-3 ml-0 mr-0">
   <div class="card highlight">
     <div class="card-block">
-      TODO
+      <select class="form-control mr-sm-2" [(ngModel)]="newTransaction.account.name">
+        <option *ngFor="let account of accounts">{{account.name}}</option>
+      </select>
+      <select class="form-control mr-sm-2" [(ngModel)]="newTransaction.subcategory">
+        <template ngFor let-category [ngForOf]="categories" let-i="index">
+          <option *ngFor="let subcategory of category.subcategories">
+            {{subcategory.name}} [{{category.name}}]
+          </option>
+        </template>
+      </select>
+      <input [(ngModel)]="newTransaction.amount" class="form-control mr-sm-2 inline" type="text"
+             placeholder="Amount">
+      <button class="btn btn-success inline" type="submit">Add</button>
     </div>
   </div>
 </div>
