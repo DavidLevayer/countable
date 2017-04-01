@@ -12,7 +12,8 @@ import { Category } from '../category/category';
   styleUrls: [
     '../shared/scss/card.common.scss',
     '../shared/scss/highlight.common.scss',
-    '../shared/scss/callout.common.scss'
+    '../shared/scss/callout.common.scss',
+    './transaction.component.scss'
   ]
 })
 export class TransactionComponent implements OnInit {

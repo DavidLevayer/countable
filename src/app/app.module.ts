@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { HomeComponent } from '../home/home.component';
 import { AccountComponent } from '../account/account.component';
 import { AccountService } from '../account/account.service';
@@ -25,7 +26,8 @@ import { TransactionService } from '../transaction/transaction.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NKDatetimeModule
   ],
   providers: [
     AccountService,
