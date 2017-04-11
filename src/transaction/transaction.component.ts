@@ -88,7 +88,7 @@ export class TransactionComponent implements OnInit {
         err => this.error = err
       );
     } else {
-      this.error = 'Invalid transaction. Operation cancelled.'
+      this.error = 'Invalid transaction. Operation cancelled.';
     }
   }
 
