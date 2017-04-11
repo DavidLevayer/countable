@@ -68,7 +68,11 @@ export class TransactionComponent implements OnInit {
 
   create(): void {
     if (this.isTransactionValid(this.newTransaction)) {
+      // Reset error message
       this.error = '';
+      // Reset time on transaction's date
+      this.removeTransactionTime(this.newTransaction);
+      // Call service to create new transaction
       this.transactionService.create(this.newTransaction).subscribe(res => {
           if (res.length === 1) {
             this.transactions.push(res[ 0 ]);
@@ -118,5 +122,15 @@ export class TransactionComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  private removeTransactionTime(transaction: Transaction): void {
+
+    let hours: number = transaction.date.getHours();
+    let minutes: number = transaction.date.getMinutes();
+    let secondes: number = transaction.date.getSeconds();
+
+    transaction.date.setTime(transaction.date.getTime() - hours * 60 * 60 * 1000
+      - minutes * 60 * 1000 - secondes * 1000);
   }
 }
