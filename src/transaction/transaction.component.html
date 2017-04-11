@@ -42,7 +42,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let transaction of transactions">
-    <td>{{transaction.date | date: 'short'}}</td>
+    <td>{{transaction.date | date: 'longDate'}}</td>
     <td>{{transaction.account.name}}</td>
     <td>{{transaction.parentCategoryName}}</td>
     <td>{{transaction.subcategory.name}}</td>
