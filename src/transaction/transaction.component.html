@@ -37,6 +37,7 @@
     <th>Subcategory</th>
     <th>Amount</th>
     <th>Balance</th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
@@ -47,6 +48,9 @@
     <td>{{transaction.subcategory.name}}</td>
     <td>{{transaction.amount}}</td>
     <td>TODO</td>
+    <td>
+      <button class="btn btn-xs btn-outline-danger border-0 fa fa-trash-o" (click)="delete(transaction.id)"></button>
+    </td>
   </tr>
   </tbody>
 </table>
