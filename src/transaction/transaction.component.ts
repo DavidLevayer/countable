@@ -92,16 +92,6 @@ export class TransactionComponent implements OnInit {
     }
   }
 
-  update(transaction: Transaction): void {
-    if (this.isTransactionValid(transaction)) {
-      this.transactionService.update(transaction).subscribe(() => {
-          this.editingTransactionId = 0;
-        },
-        err => this.error = err
-      );
-    }
-  }
-
   delete(id: number): void {
     this.transactionService.delete(id).subscribe(res => {
         if (res) {
