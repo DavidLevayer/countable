@@ -30,6 +30,12 @@ export class TransactionComponent implements OnInit {
   editingTransactionId = 0;
   /** Contains an eventual error */
   error: string;
+  /** Date picker options */
+  datepickerOpts = {
+    icon: 'fa fa-calendar',
+    autoclose: true,
+    format: 'MM dd, yyyy'
+  };
 
   constructor(private transactionService: TransactionService,
               private accountService: AccountService,

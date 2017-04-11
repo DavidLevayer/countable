@@ -10,7 +10,7 @@
   <div class="card highlight">
     <div class="card-block">
       <datetime class="mr-sm-2" [timepicker]="false" [(ngModel)]="newTransaction.date"
-                [datepicker]="{ icon: 'fa fa-calendar' }"></datetime>
+                [datepicker]="datepickerOpts"></datetime>
       <select class="form-control mr-sm-2" [(ngModel)]="newTransaction.account">
         <option *ngFor="let account of accounts" [ngValue]="account">{{account.name}}</option>
       </select>
