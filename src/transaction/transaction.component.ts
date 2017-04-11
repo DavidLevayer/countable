@@ -38,13 +38,26 @@ export class TransactionComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.getAll().subscribe(
-      res => this.accounts = res,
+      res => {
+        this.accounts = res;
+        // Select first account in the list
+        if (this.accounts.length > 0) {
+          this.newTransaction.account = this.accounts[ 0 ];
+        }
+      },
       err => this.error = err
     );
     this.categoryService.getAll().subscribe(
-      res => this.categories = res.filter((category) => {
-        return category.subcategories.length > 0;
-      }),
+      res => {
+        this.categories = res.filter((category) => {
+          return category.subcategories.length > 0;
+        });
+        // Select first subcategories in the list
+        if (this.categories.length > 0) {
+          // No need to check if category has any subcategories due to previous filter
+          this.newTransaction.subcategory = this.categories[ 0 ].subcategories[ 0 ];
+        }
+      },
       err => this.error = err
     );
     this.transactionService.getAll().subscribe(
@@ -55,6 +68,7 @@ export class TransactionComponent implements OnInit {
 
   create(): void {
     if (this.isTransactionValid(this.newTransaction)) {
+      this.error = '';
       this.transactionService.create(this.newTransaction).subscribe(res => {
           if (res.length === 1) {
             this.transactions.push(res[ 0 ]);
@@ -63,6 +77,8 @@ export class TransactionComponent implements OnInit {
         },
         err => this.error = err
       );
+    } else {
+      this.error = 'Invalid transaction. Operation cancelled.'
     }
   }
 
@@ -96,7 +112,6 @@ export class TransactionComponent implements OnInit {
 
     if (
       transaction.amount === 0 ||
-      typeof(transaction.date) !== 'Date' ||
       transaction.account.id === 0 ||
       transaction.subcategory.id === 0
     ) {
