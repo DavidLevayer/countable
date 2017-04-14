@@ -5,10 +5,12 @@ import { AccountService } from '../account/account.service';
 import { CategoryService } from '../category/category.service';
 import { Account } from '../account/account';
 import { Category } from '../category/category';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-transaction',
   templateUrl: 'transaction.component.html',
+
   styleUrls: [
     '../shared/scss/card.common.scss',
     '../shared/scss/highlight.common.scss',
@@ -43,16 +45,8 @@ export class TransactionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountService.getAll().subscribe(
-      res => {
-        this.accounts = res;
-        // Select first account in the list
-        if (this.accounts.length > 0) {
-          this.newTransaction.account = this.accounts[ 0 ];
-        }
-      },
-      err => this.error = err
-    );
+
+    // Get categories
     this.categoryService.getAll().subscribe(
       res => {
         this.categories = res.filter((category) => {
@@ -66,10 +60,39 @@ export class TransactionComponent implements OnInit {
       },
       err => this.error = err
     );
-    this.transactionService.getAll().subscribe(
-      res => this.transactions = res,
+
+    // Get accounts
+    let accountObs = this.accountService.getAll();
+    accountObs.subscribe(
+      res => {
+        this.accounts = res;
+        // Select first account in the list
+        if (this.accounts.length > 0) {
+          this.newTransaction.account = this.accounts[ 0 ];
+        }
+      },
       err => this.error = err
     );
+
+    // Get transactions
+    let transactionObs = this.transactionService.getAll();
+    transactionObs.subscribe(
+      res => {
+        this.transactions = res;
+        // Sort transaction by date
+        this.transactions.sort(function(a,b){
+          // Turn your strings into dates, and then subtract them
+          // to get a value that is either negative, positive, or zero.
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+      },
+      err => this.error = err
+    );
+
+    Observable.forkJoin(accountObs, transactionObs).subscribe(res => {
+      // We assume that transactions and accounts attributes are set
+      this.calculateBalances();
+    });
   }
 
   create(): void {
@@ -118,6 +141,25 @@ export class TransactionComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  private calculateBalances(): void {
+
+    // Initiate balances
+    let accountBalances: Map<number, number> = new Map();
+    let firstTransaction: Map<number, boolean> = new Map();
+    this.accounts.forEach(account => {
+      accountBalances.set(account.id, 0);
+      firstTransaction.set(account.id, true);
+    });
+
+    // Set transaction balances
+    for(let i=this.transactions.length-1; i>=0; i--){
+      let transaction: Transaction = this.transactions[i];
+      let newBalance: number = accountBalances.get(transaction.account.id) + transaction.amount;
+      transaction.balance = newBalance;
+      accountBalances.set(transaction.account.id, newBalance);
+    }
   }
 
   private removeTransactionTime(transaction: Transaction): void {

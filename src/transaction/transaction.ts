@@ -11,6 +11,8 @@ export class Transaction {
   parentCategoryName: string;
   parentCategoryId: number;
 
+  balance: number;
+
   constructor(id?: number, amount?: number) {
     this.id = id;
     this.amount = amount;
