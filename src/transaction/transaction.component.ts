@@ -171,4 +171,12 @@ export class TransactionComponent implements OnInit {
     transaction.date.setTime(transaction.date.getTime() - hours * 60 * 60 * 1000
       - minutes * 60 * 1000 - secondes * 1000);
   }
+
+  amountStyle(amount: number): string {
+    if(amount >= 0){
+      return 'text-success';
+    } else {
+      return 'text-danger';
+    }
+  }
 }

@@ -46,7 +46,7 @@
     <td>{{transaction.account.name}}</td>
     <td>{{transaction.parentCategoryName}}</td>
     <td>{{transaction.subcategory.name}}</td>
-    <td>{{transaction.amount}}</td>
+    <td [ngClass]="amountStyle(transaction.amount)">{{transaction.amount}}</td>
     <td>{{transaction.balance}}</td>
     <td>
       <button class="btn btn-xs btn-outline-danger border-0 fa fa-trash-o" (click)="delete(transaction.id)"></button>
