@@ -80,7 +80,7 @@ export class TransactionComponent implements OnInit {
       res => {
         this.transactions = res;
         // Sort transaction by date
-        this.transactions.sort(function(a,b){
+        this.transactions.sort(function (a, b) {
           // Turn your strings into dates, and then subtract them
           // to get a value that is either negative, positive, or zero.
           return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -154,8 +154,8 @@ export class TransactionComponent implements OnInit {
     });
 
     // Set transaction balances
-    for(let i=this.transactions.length-1; i>=0; i--){
-      let transaction: Transaction = this.transactions[i];
+    for (let i = this.transactions.length - 1; i >= 0; i--) {
+      let transaction: Transaction = this.transactions[ i ];
       let newBalance: number = accountBalances.get(transaction.account.id) + transaction.amount;
       transaction.balance = newBalance;
       accountBalances.set(transaction.account.id, newBalance);
@@ -173,7 +173,7 @@ export class TransactionComponent implements OnInit {
   }
 
   amountStyle(amount: number): string {
-    if(amount >= 0){
+    if (amount >= 0) {
       return 'text-success';
     } else {
       return 'text-danger';
