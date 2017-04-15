@@ -54,7 +54,7 @@ export class AccountRouter extends BasicRouter {
         } else {
           // Internal error
           this.logError(err.message, err.stack);
-          this.throwError(res, 'An error has occured while creating account \'' + account.name + '\'');
+          this.throwError(res, 'An error has occured while creating account \'' + account.name + '\'', 500, err.message);
         }
       });
     }
@@ -80,7 +80,7 @@ export class AccountRouter extends BasicRouter {
         } else {
           // Internal error
           this.logError(err.message, err.stack);
-          this.throwError(res, 'An error has occured while updating account \'' + account.name + '\'');
+          this.throwError(res, 'An error has occured while updating account \'' + account.name + '\'', 500, err.message);
         }
       });
     }
@@ -93,7 +93,7 @@ export class AccountRouter extends BasicRouter {
       res.json({success: success});
     }).catch((err: Error) => {
       this.logError(err.message, err.stack);
-      this.throwError(res, 'An error has occured while removing account ' + id);
+      this.throwError(res, 'An error has occured while removing account ' + id, 500, err.message);
     });
   }
 }

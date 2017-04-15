@@ -1,5 +1,6 @@
 import { Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+import { Error } from './error';
 
 export class BaseService {
 
@@ -24,7 +25,8 @@ export class BaseService {
 
   protected extractError(res: Response) {
     let body = res.json();
-    return Observable.throw(body.message || 'Something went horribly wrong...');
+    let error: Error = new Error(body.message || 'Something went horribly wrong...', body.details);
+    return Observable.throw(error);
   }
 
   protected extractSuccess(res: Response) {

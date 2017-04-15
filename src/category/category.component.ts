@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from './category';
 import { CategoryService } from './category.service';
 import { Subcategory } from './subcategory';
+import { Error } from '../shared/error';
 
 @Component({
   selector: 'app-category',
@@ -23,7 +24,7 @@ export class CategoryComponent implements OnInit {
   /** Id of the category we are currently editing */
   editingCategoryId = 0;
   /** Contains an eventual error */
-  error: string;
+  error: Error;
 
   constructor(private categoryService: CategoryService) {
   }

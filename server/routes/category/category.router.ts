@@ -92,7 +92,7 @@ export class CategoryRouter extends BasicRouter {
       res.json({success: success});
     }).catch((err: Error) => {
       this.logError(err.message, err.stack);
-      this.throwError(res, 'An error has occured while removing category ' + id);
+      this.throwError(res, 'An error has occured while removing category ' + id, 500, err.message);
     });
   }
 
@@ -121,7 +121,7 @@ export class CategoryRouter extends BasicRouter {
     } else {
       // Internal error
       this.logError(err.message, err.stack);
-      this.throwError(res, 'An error has occured while creating category \'' + category.name + '\'');
+      this.throwError(res, 'An error has occured while handling category \'' + category.name + '\'', 500, err.message);
     }
   }
 }

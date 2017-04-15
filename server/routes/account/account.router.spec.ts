@@ -64,7 +64,7 @@ class AccountTest {
   @test 'should create an account'(done) {
 
     let params: any = { name: 'new account' };
-    let expectedRes: any = { id: 12, name: 'new account' };
+    let expectedRes: any = { id: 12, name: 'new account', balance: 0 };
 
     chai.request(app).post('/api/v1/account/').send(params).end((err, res) => {
       res.should.have.status(201);
@@ -100,7 +100,7 @@ class AccountTest {
   @test 'should update an account'(done) {
 
     let params: any = { name: 'updated account' };
-    let expectedRes: any = { id: 11, name: 'updated account' };
+    let expectedRes: any = { id: 11, name: 'updated account', balance: 0 };
 
     chai.request(app).put('/api/v1/account/11').send(params).end((err, res) => {
       res.should.have.status(200);
