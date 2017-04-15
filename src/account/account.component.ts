@@ -42,6 +42,7 @@ export class AccountComponent implements OnInit {
             this.accounts.push(res[ 0 ]);
           }
           this.accountName = '';
+          this.error = null;
         },
         err => this.error = err
       );
@@ -52,6 +53,7 @@ export class AccountComponent implements OnInit {
     if (this.editingAccountId >= 0) {
       this.accountService.update(account).subscribe(() => {
           this.editingAccountId = 0;
+          this.error = null;
         },
         err => this.error = err
       );
@@ -62,8 +64,9 @@ export class AccountComponent implements OnInit {
     this.accountService.delete(id).subscribe(res => {
         if (res) {
           this.accounts = this.accounts.filter((account) => account.id !== id);
+          this.error = null;
         } else {
-          this.error = 'Cannot delete account #' + id + ': server returns failure status.';
+          this.error = new Error('Cannot delete account #' + id + ': server returns failure status.');
         }
       },
       err => this.error = err

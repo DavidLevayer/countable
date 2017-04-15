@@ -45,7 +45,7 @@ export class CategoryComponent implements OnInit {
             this.categories.push(res[ 0 ]);
           }
           this.categoryName = '';
-          this.error = '';
+          this.error = null;
         },
         err => this.error = err
       );
@@ -56,6 +56,7 @@ export class CategoryComponent implements OnInit {
     if (this.editingCategoryId >= 0) {
       this.categoryService.update(category).subscribe(() => {
           this.editingCategoryId = 0;
+          this.error = null;
         },
         err => this.error = err
       );
@@ -66,8 +67,9 @@ export class CategoryComponent implements OnInit {
     this.categoryService.delete(id).subscribe(res => {
         if (res) {
           this.categories = this.categories.filter((category) => category.id !== id);
+          this.error = null;
         } else {
-          this.error = 'Cannot delete category #' + id + ': server returns failure status.';
+          this.error = new Error('Cannot delete category #' + id + ': server returns failure status.');
         }
       },
       err => this.error = err

@@ -99,7 +99,7 @@ export class TransactionComponent implements OnInit {
   create(): void {
     if (this.isTransactionValid(this.newTransaction)) {
       // Reset error message
-      this.error = '';
+      this.error = null;
       // Reset time on transaction's date
       this.removeTransactionTime(this.newTransaction);
       // Call service to create new transaction
@@ -112,7 +112,7 @@ export class TransactionComponent implements OnInit {
         err => this.error = err
       );
     } else {
-      this.error = 'Invalid transaction. Operation cancelled.';
+      this.error = new Error('Invalid transaction. Operation cancelled.');
     }
   }
 
@@ -120,8 +120,9 @@ export class TransactionComponent implements OnInit {
     this.transactionService.delete(id).subscribe(res => {
         if (res) {
           this.transactions = this.transactions.filter((trans) => trans.id !== id);
+          this.error = null;
         } else {
-          this.error = 'Cannot delete transaction #' + id + ': server returns failure status.';
+          this.error = new Error('Cannot delete transaction #' + id + ': server returns failure status.');
         }
       },
       err => this.error = err
