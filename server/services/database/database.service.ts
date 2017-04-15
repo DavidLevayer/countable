@@ -21,6 +21,9 @@ export class DatabaseService {
       db = new SQLiteConnector('./countable-database.sqlite', true);
     }
 
+    // Enables foreign keys
+    db.executeQuery(QueryType.SELECT, 'PRAGMA foreign_keys = ON;');
+
     // Create table structure if needed
     let tablePromises: Promise<any>[] = [];
     populationQueries.forEach(function (query) {

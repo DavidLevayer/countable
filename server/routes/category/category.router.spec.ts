@@ -81,7 +81,25 @@ class CategoryTest {
     };
 
     chai.request(app).post('/api/v1/category/').send(params).end((err, res) => {
-      res.should.have.status(200);
+      res.should.have.status(201);
+      res.body.should.be.a('array');
+      res.body.should.have.length(1);
+      res.body[ 0 ].should.eql(expectedRes);
+      done();
+    });
+  }
+
+  @test 'should create a category without subcategories'(done) {
+
+    let params: any = { name: 'new category only' };
+    let expectedRes: any = {
+      id: 13,
+      name: 'new category only',
+      subcategories: []
+    };
+
+    chai.request(app).post('/api/v1/category/').send(params).end((err, res) => {
+      res.should.have.status(201);
       res.body.should.be.a('array');
       res.body.should.have.length(1);
       res.body[ 0 ].should.eql(expectedRes);

@@ -1,0 +1,39 @@
+div.header {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+div.header > div.title {
+
+  font-size: 2.5rem;
+}
+
+div.header > form {
+  float: right;
+  display: inline-block;
+}
+
+div.highlight {
+
+  width: 100%;
+  background-color: #f7f7f7;
+
+  .card-block {
+    display: flex;
+
+    .form-control {
+      width: 35%;
+      margin-left: auto;
+    }
+
+    button {
+      margin-right: auto;
+    }
+  }
+}
+
+div.header, div.highlight {
+  .inline {
+    display: inline-block;
+  }
+}

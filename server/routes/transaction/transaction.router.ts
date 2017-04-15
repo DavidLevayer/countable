@@ -52,7 +52,7 @@ export class TransactionRouter extends BasicRouter {
       }).catch((err: Error) => {
         // Internal error
         this.logError(err.message, err.stack);
-        this.throwError(res, 'An error has occured while creating transaction');
+        this.throwError(res, 'An error has occured while creating transaction', 500, err.message);
       });
     }
   }
@@ -77,7 +77,7 @@ export class TransactionRouter extends BasicRouter {
       }).catch((err: Error) => {
         // Internal error
         this.logError(err.message, err.stack);
-        this.throwError(res, 'An error has occured while updating transaction');
+        this.throwError(res, 'An error has occured while updating transaction', 500, err.message);
       });
     }
   }
@@ -89,7 +89,7 @@ export class TransactionRouter extends BasicRouter {
       res.json({success: success});
     }).catch((err: Error) => {
       this.logError(err.message, err.stack);
-      this.throwError(res, 'An error has occured while removing transaction ' + id);
+      this.throwError(res, 'An error has occured while removing transaction ' + id, 500, err.message);
     });
   }
 }

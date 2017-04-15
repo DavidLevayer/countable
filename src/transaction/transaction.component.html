@@ -1,0 +1,57 @@
+<div class="header">
+  <div class="title inline">List of Transactions</div>
+</div>
+
+<div *ngIf="error" class="bs-callout bs-callout-danger error">
+  <h4>Error</h4> {{error.message}}
+  <p *ngIf="error.details" class="details">{{error.details}}</p>
+</div>
+
+<div class="row mb-3 ml-0 mr-0">
+  <div class="card highlight">
+    <div class="card-block">
+      <datetime class="mr-sm-2" [timepicker]="false" [(ngModel)]="newTransaction.date"
+                [datepicker]="datepickerOpts"></datetime>
+      <select class="form-control mr-sm-2" [(ngModel)]="newTransaction.account">
+        <option *ngFor="let account of accounts" [ngValue]="account">{{account.name}}</option>
+      </select>
+      <select class="form-control mr-sm-2" [(ngModel)]="newTransaction.subcategory">
+        <template ngFor let-category [ngForOf]="categories" let-i="index">
+          <option *ngFor="let subcategory of category.subcategories" [ngValue]="subcategory">
+            {{subcategory.name}} [{{category.name}}]
+          </option>
+        </template>
+      </select>
+      <input [(ngModel)]="newTransaction.amount" class="form-control mr-sm-2 inline" type="number"
+             placeholder="Amount">
+      <button class="btn btn-success inline" type="submit" (click)="create()">Add</button>
+    </div>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Account</th>
+    <th>Category</th>
+    <th>Subcategory</th>
+    <th>Amount</th>
+    <th>Balance</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let transaction of transactions">
+    <td>{{transaction.date | date: 'longDate'}}</td>
+    <td>{{transaction.account.name}}</td>
+    <td>{{transaction.parentCategoryName}}</td>
+    <td>{{transaction.subcategory.name}}</td>
+    <td [ngClass]="amountStyle(transaction.amount)">{{transaction.amount}}</td>
+    <td>{{transaction.balance}}</td>
+    <td>
+      <button class="btn btn-xs btn-outline-danger border-0 fa fa-trash-o" (click)="delete(transaction.id)"></button>
+    </td>
+  </tr>
+  </tbody>
+</table>

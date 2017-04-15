@@ -51,7 +51,7 @@ List of planned functionality:
 List of developer features:
 - [x] Continuous integration (Travis CI)
 - [x] Frontend Unit tests
-- [x] Frontend code coverage tool
+- [ ] Frontend code coverage tool - *waiting for stable release of instanbul-coverage*
 - [x] Backend Unit tests
 - [ ] Backend code coverage tool
 - [ ] Integrate online code coverage tool

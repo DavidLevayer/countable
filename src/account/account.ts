@@ -1,11 +1,7 @@
-import { JsonProperty } from 'ts-express-decorators';
-
 export class Account {
-  @JsonProperty()
-  id: number;
-  @JsonProperty()
-  name: string;
 
+  id: number;
+  name: string;
   balance: number;
 
   constructor(id?: number, name?: string) {
