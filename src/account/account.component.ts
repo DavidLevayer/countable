@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from './account';
 import { AccountService } from './account.service';
+import { Error } from '../shared/error';
 
 @Component({
   selector: 'app-account',
@@ -20,7 +21,7 @@ export class AccountComponent implements OnInit {
   /** Id of the account we are currently editing */
   editingAccountId = 0;
   /** Contains an eventual error */
-  error: string;
+  error: Error;
 
   constructor(private accountService: AccountService) {
   }

@@ -8,11 +8,12 @@ export class BasicRouter implements CrudRouter {
    * @param message
    * @param status
    */
-  public throwError(res, message: string, status = 500): void {
+  public throwError(res, message: string, status = 500, details = ''): void {
     // Set response status and message
     res.status(status);
     res.json({
-      message: message
+      message: message,
+      details: details
     });
   }
 

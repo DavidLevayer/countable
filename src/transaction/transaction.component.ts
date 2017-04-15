@@ -6,6 +6,7 @@ import { CategoryService } from '../category/category.service';
 import { Account } from '../account/account';
 import { Category } from '../category/category';
 import { Observable } from 'rxjs';
+import { Error } from '../shared/error';
 
 @Component({
   selector: 'app-transaction',
@@ -31,7 +32,7 @@ export class TransactionComponent implements OnInit {
   /** Id of the transaction we are currently editing */
   editingTransactionId = 0;
   /** Contains an eventual error */
-  error: string;
+  error: Error;
   /** Date picker options */
   datepickerOpts = {
     icon: 'fa fa-calendar',
