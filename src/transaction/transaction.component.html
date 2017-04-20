@@ -18,7 +18,7 @@
       <select class="form-control mr-sm-2" [(ngModel)]="newTransaction.subcategory">
         <template ngFor let-category [ngForOf]="categories" let-i="index">
           <option *ngFor="let subcategory of category.subcategories" [ngValue]="subcategory">
-            {{subcategory.name}} [{{category.name}}]
+            [{{category.name}}] {{subcategory.name}}
           </option>
         </template>
       </select>
