@@ -16,6 +16,7 @@ import { Error } from '../shared/error';
     '../shared/scss/card.common.scss',
     '../shared/scss/highlight.common.scss',
     '../shared/scss/callout.common.scss',
+    '../shared/scss/pagination.common.scss',
     './transaction.component.scss'
   ]
 })
@@ -39,6 +40,10 @@ export class TransactionComponent implements OnInit {
     autoclose: true,
     format: 'MM dd, yyyy'
   };
+  /** Current page */
+  page = 1;
+  /** Number of transaction per page */
+  transactionPerPage = 10;
 
   constructor(private transactionService: TransactionService,
               private accountService: AccountService,

@@ -1,0 +1,13 @@
+/deep/
+ul.ngx-pagination {
+  padding: 0;
+  text-align: center;
+
+  li {
+    border-radius: .25rem;
+  }
+
+  span:not(.show-for-sr):hover{
+    cursor: pointer;
+  }
+}

@@ -42,7 +42,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let transaction of transactions">
+  <tr *ngFor="let transaction of transactions | paginate: { itemsPerPage: transactionPerPage, currentPage: page }">
     <td>{{transaction.date | date: 'longDate'}}</td>
     <td>{{transaction.account.name}}</td>
     <td>{{transaction.parentCategoryName}}</td>
@@ -55,3 +55,5 @@
   </tr>
   </tbody>
 </table>
+
+<pagination-controls (pageChange)="page = $event"></pagination-controls>
