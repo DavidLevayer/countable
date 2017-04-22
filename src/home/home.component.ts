@@ -22,6 +22,18 @@ export class HomeComponent implements OnInit {
   /** Contains an eventual error */
   error: Error;
 
+  accountChartLabels: string[] = [];
+  accountChartData: number[] = [];
+
+  categoryChartLabels: string[] = [];
+  categoryChartData: number[] = [];
+
+  subcategoryChartLabels: string[] = [];
+  subcategoryChartData: number[] = [];
+
+  doughnutChartType:string = 'doughnut';
+  doughnutLegend:boolean = true;
+
   constructor(private accountService: AccountService, private categoryService: CategoryService) {
   }
 
@@ -29,13 +41,39 @@ export class HomeComponent implements OnInit {
 
     // Get categories
     this.categoryService.getAll(true).subscribe(
-      res => this.categories = res,
+      res => {
+        this.categories = res;
+        console.log(this.categoryChartLabels);
+        console.log(this.categoryChartData);
+        this.categories.forEach(category => {
+          if(category.balance !== 0){
+            this.categoryChartLabels.push(category.name);
+            this.categoryChartData.push(category.balance);
+          }
+          category.subcategories.forEach(subcategory => {
+            if(subcategory.balance !== 0){
+              this.subcategoryChartLabels.push(subcategory.name);
+              this.subcategoryChartData.push(subcategory.balance);
+            }
+          })
+        });
+        console.log(this.categoryChartLabels);
+        console.log(this.categoryChartData);
+      },
       err => this.error = err
     );
 
     // Get accounts
     this.accountService.getAll().subscribe(
-      res => this.accounts = res,
+      res => {
+        this.accounts = res;
+        this.accounts.forEach(account => {
+          if(account.balance > 0){
+            this.accountChartLabels.push(account.name);
+            this.accountChartData.push(account.balance);
+          }
+        });
+      },
       err => this.error = err
     );
   }

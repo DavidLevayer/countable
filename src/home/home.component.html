@@ -7,25 +7,48 @@
   <p *ngIf="error.details" class="details">{{error.details}}</p>
 </div>
 
-<div class="col-sm-6 col-xs-12">
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Category</th>
-      <th>Sum</th>
-      <th>Subcategory</th>
-      <th>Sum</th>
-    </tr>
-    </thead>
-    <tbody>
-    <template ngFor let-category [ngForOf]="categories">
-      <tr *ngFor="let subcategory of category.subcategories; let i = index">
-        <td *ngIf="i === 0" [attr.rowspan]="category.subcategories.length">{{category.name}}</td>
-        <td *ngIf="i === 0" [attr.rowspan]="category.subcategories.length">{{category.balance}}</td>
-        <td>{{subcategory.name}}</td>
-        <td>{{subcategory.balance}}</td>
+<div class="row">
+  <div *ngIf="accountChartLabels.length > 0" class="col-4">
+    <canvas baseChart
+            [data]="accountChartData"
+            [labels]="accountChartLabels"
+            [chartType]="doughnutChartType"></canvas>
+  </div>
+  <div *ngIf="categoryChartLabels.length > 0" class="col-4">
+    <canvas baseChart
+            [data]="categoryChartData"
+            [labels]="categoryChartLabels"
+            [chartType]="doughnutChartType"></canvas>
+  </div>
+  <div *ngIf="subcategoryChartLabels.length > 0" class="col-4">
+    <canvas baseChart
+            [data]="subcategoryChartData"
+            [labels]="subcategoryChartLabels"
+            [chartType]="doughnutChartType"></canvas>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-6 offset-3">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Category</th>
+        <th>Sum</th>
+        <th>Subcategory</th>
+        <th>Sum</th>
       </tr>
-    </template>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+      <template ngFor let-category [ngForOf]="categories">
+        <tr *ngFor="let subcategory of category.subcategories; let i = index">
+          <td *ngIf="i === 0" [attr.rowspan]="category.subcategories.length">{{category.name}}</td>
+          <td *ngIf="i === 0" [attr.rowspan]="category.subcategories.length">{{category.balance}}</td>
+          <td>{{subcategory.name}}</td>
+          <td>{{subcategory.balance}}</td>
+        </tr>
+      </template>
+      </tbody>
+    </table>
+  </div>
 </div>
