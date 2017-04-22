@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Transaction } from './transaction';
+import { Transaction } from '../shared/model/transaction';
 import { TransactionService } from './transaction.service';
 import { AccountService } from '../account/account.service';
 import { CategoryService } from '../category/category.service';
-import { Account } from '../account/account';
-import { Category } from '../category/category';
+import { Account } from '../shared/model/account';
+import { Category } from '../shared/model/category';
 import { Observable } from 'rxjs';
 import { Error } from '../shared/error';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Account } from './account';
+import { Account } from '../shared/model/account';
 import { AccountService } from './account.service';
 import { Error } from '../shared/error';
 

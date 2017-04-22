@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { Category } from './category';
+import { Category } from '../shared/model/category';
 
 @Injectable()
 export class CategoryService extends BaseService {
