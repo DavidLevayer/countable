@@ -6,3 +6,26 @@
   <h4>Error</h4> {{error.message}}
   <p *ngIf="error.details" class="details">{{error.details}}</p>
 </div>
+
+<div class="col-sm-6 col-xs-12">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Category</th>
+      <th>Sum</th>
+      <th>Subcategory</th>
+      <th>Sum</th>
+    </tr>
+    </thead>
+    <tbody>
+    <template ngFor let-category [ngForOf]="categories">
+      <tr *ngFor="let subcategory of category.subcategories; let i = index">
+        <td *ngIf="i === 0" [attr.rowspan]="category.subcategories.length">{{category.name}}</td>
+        <td *ngIf="i === 0" [attr.rowspan]="category.subcategories.length">{{category.balance}}</td>
+        <td>{{subcategory.name}}</td>
+        <td>{{subcategory.balance}}</td>
+      </tr>
+    </template>
+    </tbody>
+  </table>
+</div>

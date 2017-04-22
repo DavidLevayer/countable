@@ -21,9 +21,14 @@ export class CategoryService extends BaseService {
    * Returns the list of categories
    * @returns {Observable<Category[]>}
    */
-  public getAll(): Observable<Category[]> {
-
-    return this.http.get(this.baseUrl + this.categoryUrl).map(this.extractArray).catch(this.extractError);
+  public getAll(details = false): Observable<Category[]> {
+    let url: string;
+    if (details) {
+      url = this.baseUrl + this.categoryUrl + '?details=true';
+    } else {
+      url = this.baseUrl + this.categoryUrl;
+    }
+    return this.http.get(url).map(this.extractArray).catch(this.extractError);
   }
 
   /**
