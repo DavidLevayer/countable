@@ -43,8 +43,6 @@ export class HomeComponent implements OnInit {
     this.categoryService.getAll(true).subscribe(
       res => {
         this.categories = res;
-        console.log(this.categoryChartLabels);
-        console.log(this.categoryChartData);
         this.categories.forEach(category => {
           if(category.balance !== 0){
             this.categoryChartLabels.push(category.name);
@@ -57,8 +55,6 @@ export class HomeComponent implements OnInit {
             }
           })
         });
-        console.log(this.categoryChartLabels);
-        console.log(this.categoryChartData);
       },
       err => this.error = err
     );
