@@ -31,8 +31,7 @@ export class HomeComponent implements OnInit {
   subcategoryChartLabels: string[] = [];
   subcategoryChartData: number[] = [];
 
-  doughnutChartType:string = 'doughnut';
-  doughnutLegend:boolean = true;
+  doughnutChartType = 'doughnut';
 
   constructor(private accountService: AccountService, private categoryService: CategoryService) {
   }
@@ -44,16 +43,16 @@ export class HomeComponent implements OnInit {
       res => {
         this.categories = res;
         this.categories.forEach(category => {
-          if(category.balance !== 0){
+          if (category.balance !== 0) {
             this.categoryChartLabels.push(category.name);
             this.categoryChartData.push(category.balance);
           }
           category.subcategories.forEach(subcategory => {
-            if(subcategory.balance !== 0){
+            if (subcategory.balance !== 0) {
               this.subcategoryChartLabels.push(subcategory.name);
               this.subcategoryChartData.push(subcategory.balance);
             }
-          })
+          });
         });
       },
       err => this.error = err
@@ -64,7 +63,7 @@ export class HomeComponent implements OnInit {
       res => {
         this.accounts = res;
         this.accounts.forEach(account => {
-          if(account.balance > 0){
+          if (account.balance > 0) {
             this.accountChartLabels.push(account.name);
             this.accountChartData.push(account.balance);
           }
