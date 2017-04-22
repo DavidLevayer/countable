@@ -1,0 +1,8 @@
+<div class="header">
+  <div class="title inline">Dashboard</div>
+</div>
+
+<div *ngIf="error" class="bs-callout bs-callout-danger error">
+  <h4>Error</h4> {{error.message}}
+  <p *ngIf="error.details" class="details">{{error.details}}</p>
+</div>
