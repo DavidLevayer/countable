@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../shared/base.service';
 import { Http } from '@angular/http';
-import { Account } from './account';
 import { Observable } from 'rxjs/Rx';
+import { Account } from '../shared/model/account';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
