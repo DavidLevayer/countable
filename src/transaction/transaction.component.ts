@@ -16,6 +16,7 @@ import { Error } from '../shared/error';
     '../shared/scss/card.common.scss',
     '../shared/scss/highlight.common.scss',
     '../shared/scss/callout.common.scss',
+    '../shared/scss/pagination.common.scss',
     './transaction.component.scss'
   ]
 })
@@ -39,6 +40,10 @@ export class TransactionComponent implements OnInit {
     autoclose: true,
     format: 'MM dd, yyyy'
   };
+  /** Current page */
+  page = 1;
+  /** Number of transaction per page */
+  transactionPerPage = 10;
 
   constructor(private transactionService: TransactionService,
               private accountService: AccountService,
@@ -81,11 +86,7 @@ export class TransactionComponent implements OnInit {
       res => {
         this.transactions = res;
         // Sort transaction by date
-        this.transactions.sort(function (a, b) {
-          // Turn your strings into dates, and then subtract them
-          // to get a value that is either negative, positive, or zero.
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
+        this.sortTransactions();
       },
       err => this.error = err
     );
@@ -106,6 +107,8 @@ export class TransactionComponent implements OnInit {
       this.transactionService.create(this.newTransaction).subscribe(res => {
           if (res.length === 1) {
             this.transactions.push(res[ 0 ]);
+            this.sortTransactions();
+            this.calculateBalances();
           }
           this.newTransaction = new Transaction();
         },
@@ -143,6 +146,14 @@ export class TransactionComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  private sortTransactions(): void {
+    this.transactions.sort(function (a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
   }
 
   private calculateBalances(): void {

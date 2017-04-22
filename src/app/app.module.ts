@@ -13,6 +13,7 @@ import { CategoryService } from '../category/category.service';
 import { CategoryComponent } from '../category/category.component';
 import { TransactionComponent } from '../transaction/transaction.component';
 import { TransactionService } from '../transaction/transaction.service';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TransactionService } from '../transaction/transaction.service';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    NKDatetimeModule
+    NKDatetimeModule,
+    NgxPaginationModule
   ],
   providers: [
     AccountService,

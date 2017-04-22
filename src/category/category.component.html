@@ -27,19 +27,19 @@
 
       <div *ngIf="editingCategoryId === category.id" class="d-flex flex-row">
         <input [(ngModel)]="category.name"
-               class="form-control mr-sm-1 inline" type="text">
+               class="form-control inline" type="text">
       </div>
 
       <!-- List of subcategories -->
-      <div *ngFor="let subcategory of category.subcategories" class="mb-2">
+      <div *ngFor="let subcategory of category.subcategories" class="mt-sm-2">
         <h6 class="inline">{{subcategory.name}}</h6>
         <button *ngIf="editingCategoryId === category.id" type="button"
-                class="btn float-right btn-outline-danger fa fa-times inline"
+                class="btn btn-sm float-right btn-outline-danger fa fa-times inline"
                 (click)="removeSubcategory(category, subcategory)"></button>
       </div>
 
       <!-- Input used to add a new subcategory -->
-      <div *ngIf="editingCategoryId === category.id" class="d-flex flex-row">
+      <div *ngIf="editingCategoryId === category.id" class="d-flex flex-row mt-sm-2">
         <input [(ngModel)]="subcategoryName" class="form-control mr-sm-1 inline" type="text">
         <button type="button" class="btn btn-outline-success fa fa-plus inline"
                 (click)="addSubcategory(category)"></button>

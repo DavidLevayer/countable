@@ -18,7 +18,7 @@
       <select class="form-control mr-sm-2" [(ngModel)]="newTransaction.subcategory">
         <template ngFor let-category [ngForOf]="categories" let-i="index">
           <option *ngFor="let subcategory of category.subcategories" [ngValue]="subcategory">
-            {{subcategory.name}} [{{category.name}}]
+            [{{category.name}}] {{subcategory.name}}
           </option>
         </template>
       </select>
@@ -42,7 +42,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let transaction of transactions">
+  <tr *ngFor="let transaction of transactions | paginate: { itemsPerPage: transactionPerPage, currentPage: page }">
     <td>{{transaction.date | date: 'longDate'}}</td>
     <td>{{transaction.account.name}}</td>
     <td>{{transaction.parentCategoryName}}</td>
@@ -55,3 +55,5 @@
   </tr>
   </tbody>
 </table>
+
+<pagination-controls (pageChange)="page = $event"></pagination-controls>
