@@ -10,27 +10,45 @@ export class CategoryService implements CrudService {
   constructor(private databaseService: DatabaseService) {
   }
 
-  get(id: number): Promise<Category[]> {
+  get(id: number, details?: boolean): Promise<Category[]> {
 
-    const query = 'SELECT C.id as catId, C.name as catName, S.id as subId, S.name as subName ' +
-      'FROM Category as C LEFT JOIN Subcategory as S ON C.id = S.refCategory WHERE C.id = ?;';
+    let query: string;
+
+    if (details) {
+      query = 'SELECT C.id as catId, C.name as catName, ' +
+        'S.id as subId, S.name as subName, IFNULL(SUM(T.amount),0) as subBalance ' +
+        'FROM Category as C LEFT JOIN Subcategory as S ON C.id = S.refCategory ' +
+        'LEFT JOIN MoneyTransaction as T on S.id = T.refSubcategory WHERE C.id = ? GROUP BY S.id;';
+    } else {
+      query = 'SELECT C.id as catId, C.name as catName, S.id as subId, S.name as subName ' +
+        'FROM Category as C LEFT JOIN Subcategory as S ON C.id = S.refCategory WHERE C.id = ?;';
+    }
 
     return this.databaseService.select(query, id).then(rows => {
-      return this.extractCategories(rows);
+      return this.extractCategories(rows, details);
     });
   }
 
-  getAll(): Promise<Category[]> {
+  getAll(details?: boolean): Promise<Category[]> {
 
-    const query = 'SELECT C.id as catId, C.name as catName, S.id as subId, S.name as subName ' +
-      'FROM Category as C LEFT JOIN Subcategory as S ON C.id = S.refCategory;';
+    let query: string;
+
+    if (details) {
+      query = 'SELECT C.id as catId, C.name as catName, ' +
+        'S.id as subId, S.name as subName, IFNULL(SUM(T.amount),0) as subBalance ' +
+        'FROM Category as C LEFT JOIN Subcategory as S ON C.id = S.refCategory ' +
+        'LEFT JOIN MoneyTransaction as T on S.id = T.refSubcategory GROUP BY S.id;';
+    } else {
+      query = 'SELECT C.id as catId, C.name as catName, S.id as subId, S.name as subName ' +
+        'FROM Category as C LEFT JOIN Subcategory as S ON C.id = S.refCategory;';
+    }
 
     return this.databaseService.select(query, []).then(rows => {
-      return this.extractCategories(rows);
+      return this.extractCategories(rows, details);
     });
   }
 
-  private extractCategories(rows: any[]): Category[] {
+  private extractCategories(rows: any[], details?: boolean): Category[] {
 
     let map: Map<number, Category> = new Map();
     for (let row of rows) {
@@ -40,6 +58,9 @@ export class CategoryService implements CrudService {
         let category: Category = new Category();
         category.id = row.catId;
         category.name = row.catName;
+        if (details) {
+          category.balance = 0;
+        }
         map.set(row.catId, category);
       }
 
@@ -47,7 +68,12 @@ export class CategoryService implements CrudService {
         let subcategory: Subcategory = new Subcategory();
         subcategory.id = row.subId;
         subcategory.name = row.subName;
-        map.get(row.catId).subcategories.push(subcategory);
+        let parentCategory: Category = map.get(row.catId);
+        if (details) {
+          subcategory.balance = row.subBalance;
+          parentCategory.balance += row.subBalance;
+        }
+        parentCategory.subcategories.push(subcategory);
       }
     }
 
