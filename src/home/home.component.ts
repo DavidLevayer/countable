@@ -43,14 +43,14 @@ export class HomeComponent implements OnInit {
       res => {
         this.categories = res;
         this.categories.forEach(category => {
-          if (category.balance !== 0) {
+          if (category.balance < 0) {
             this.categoryChartLabels.push(category.name);
-            this.categoryChartData.push(category.balance);
+            this.categoryChartData.push(-category.balance);
           }
           category.subcategories.forEach(subcategory => {
-            if (subcategory.balance !== 0) {
+            if (subcategory.balance < 0) {
               this.subcategoryChartLabels.push(subcategory.name);
-              this.subcategoryChartData.push(subcategory.balance);
+              this.subcategoryChartData.push(-subcategory.balance);
             }
           });
         });
