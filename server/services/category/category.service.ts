@@ -103,11 +103,8 @@ export class CategoryService implements CrudService {
 
     const query = 'UPDATE Category SET name = ? WHERE id = ?;';
     return this.databaseService.update(query, category.name, category.id).then(() => {
-      // Remove all existing subcategories
-      return this.deleteSubcategories(category.id);
-    }).then(() => {
-      // Add update subcategories
-      return this.insertSubcategories(category.id, category);
+      // Update subcategories
+      return this.updateSubcategories(category.id, category);
     }).then(() => {
       // Return newly updated category
       return this.get(category.id);
@@ -136,6 +133,57 @@ export class CategoryService implements CrudService {
 
     subquery = subquery.substr(0, subquery.length - 1).concat(';');
     return this.databaseService.insert(subquery, ...params);
+  }
+
+  private updateSubcategories(categoryId: number, category: Category): Promise<number> {
+
+    const insertSubquery = 'INSERT INTO Subcategory (name, refCategory) VALUES (?, ?); ';
+    const updateSubquery = 'UPDATE Subcategory SET name = ? WHERE id = ?; ';
+    const deleteSubquery = 'DELETE FROM Subcategory WHERE id = ?; ';
+    let queries: Promise<number>[] = [];
+
+    return this.get(categoryId).then((res: Category[]) => {
+
+      let currentCategory: Category = res[ 0 ];
+
+      // Store current subcategories in a map object
+      let map: Map<number, string> = new Map();
+      let ids: Set<number> = new Set();
+      currentCategory.subcategories.forEach(subcategory => {
+        map.set(subcategory.id, subcategory.name);
+      });
+
+      // Diff between current subcategories (in database) and new subcategories
+      category.subcategories.forEach((subcategory: Subcategory) => {
+
+        if (subcategory.id === null || typeof subcategory.id === 'undefined') {
+          // Create new subcategory
+          queries.push(this.databaseService.insert(insertSubquery, subcategory.name, String(category.id)));
+          return;
+        }
+
+        // Store ids for later (search for delete)
+        ids.add(subcategory.id);
+
+        if (map.has(subcategory.id)) {
+          // Update existing subcategory
+          if (subcategory.name !== map.get(subcategory.id)) {
+            queries.push(this.databaseService.update(updateSubquery, subcategory.name, String(subcategory.id)));
+          }
+        }
+      });
+
+      map.forEach((name, id) => {
+        if (!ids.has(id)) {
+          // Remove subcategory
+          queries.push(this.databaseService.delete(deleteSubquery, String(id)));
+        }
+      });
+
+      return Promise.all(queries).then(values => {
+        return values.reduce((a, b) => a + b, 0);
+      });
+    });
   }
 
   private deleteSubcategories(categoryId: number): Promise<boolean> {
