@@ -1,5 +1,5 @@
-import { Account } from '../account/account';
-import { Subcategory } from '../category/subcategory';
+import { Account } from './account';
+import { Subcategory } from './subcategory';
 export class Transaction {
 
   id: number;

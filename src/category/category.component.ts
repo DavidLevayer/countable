@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from './category';
+import { Category } from '../shared/model/category';
 import { CategoryService } from './category.service';
-import { Subcategory } from './subcategory';
+import { Subcategory } from '../shared/model/subcategory';
 import { Error } from '../shared/error';
 
 @Component({

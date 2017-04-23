@@ -1,4 +1,7 @@
-import { Controller, Get, Response, PathParams, BodyParams, Post, Put, Delete } from 'ts-express-decorators';
+import {
+  Controller, Get, Response, PathParams, BodyParams, Post, Put, Delete,
+  QueryParams
+} from 'ts-express-decorators';
 import { BasicRouter } from '../basic.router';
 import * as Express from 'express';
 import { CategoryService } from '../../services/category/category.service';
@@ -16,9 +19,9 @@ export class CategoryRouter extends BasicRouter {
   }
 
   @Get('/')
-  public getAll(@Response() res: Express.Response) {
+  public getAll(@QueryParams('details') details: string, @Response() res: Express.Response) {
 
-    return this.categoryService.getAll().then((rows) => {
+    return this.categoryService.getAll(details === 'true' ? true : false).then((rows) => {
       res.json(rows);
     }).catch(err => {
       this.logError(err);
@@ -27,9 +30,9 @@ export class CategoryRouter extends BasicRouter {
   }
 
   @Get('/:id')
-  public get(@PathParams('id') id: number, @Response() res: Express.Response) {
+  public get(@PathParams('id') id: number, @QueryParams('details') details: string, @Response() res: Express.Response) {
 
-    return this.categoryService.get(id).then((rows) => {
+    return this.categoryService.get(id, details === 'true' ? true : false).then((rows) => {
       res.json(rows);
     }).catch(err => {
       this.logError(err);

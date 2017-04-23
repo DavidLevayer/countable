@@ -14,6 +14,7 @@ import { CategoryComponent } from '../category/category.component';
 import { TransactionComponent } from '../transaction/transaction.component';
 import { TransactionService } from '../transaction/transaction.service';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     HttpModule,
     AppRoutingModule,
     NKDatetimeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ChartsModule
   ],
   providers: [
     AccountService,

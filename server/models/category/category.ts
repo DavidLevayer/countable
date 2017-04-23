@@ -9,6 +9,8 @@ export class Category {
   @JsonProperty({use: Subcategory})
   subcategories: Subcategory[] = [];
 
+  balance: number;
+
   constructor(id?: number, name?: string) {
     this.id = id;
     this.name = name;

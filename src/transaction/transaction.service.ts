@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { Transaction } from './transaction';
+import { Transaction } from '../shared/model/transaction';
 
 @Injectable()
 export class TransactionService extends BaseService {
