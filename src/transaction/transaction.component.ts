@@ -111,7 +111,9 @@ export class TransactionComponent implements OnInit {
             this.sortTransactions();
             this.calculateBalances();
           }
-          this.newTransaction = new Transaction();
+          // Reinitialize transaction subcategory and transaction amount
+          this.newTransaction.subcategory = null;
+          this.newTransaction.amount = null;
         },
         err => this.error = err
       );
