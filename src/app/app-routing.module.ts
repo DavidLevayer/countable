@@ -6,6 +6,7 @@ import { CategoryComponent } from '../category/category.component';
 import { TransactionComponent } from '../transaction/transaction.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { component: HomeComponent, path: 'home' },
   { component: AccountComponent, path: 'account' },
   { component: CategoryComponent, path: 'category' },
