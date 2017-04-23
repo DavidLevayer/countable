@@ -11,14 +11,14 @@ export class AccountService implements CrudService {
 
   get(objectId: number): Promise<Account[]> {
 
-    const query = 'SELECT A.id, A.name, IFNULL(SUM(T.amount),0) as balance FROM Account as A LEFT JOIN MoneyTransaction as T ' +
+    const query = 'SELECT A.id, A.name, IFNULL(ROUND(SUM(T.amount),2),0) as balance FROM Account as A LEFT JOIN MoneyTransaction as T ' +
       'ON A.id = T.refAccount WHERE A.id = ? GROUP BY A.id;';
     return this.databaseService.select(query, objectId);
   }
 
   getAll(): Promise<Account[]> {
 
-    const query = 'SELECT A.id, A.name, IFNULL(SUM(T.amount),0) as balance FROM Account as A LEFT JOIN MoneyTransaction as T ' +
+    const query = 'SELECT A.id, A.name, IFNULL(ROUND(SUM(T.amount),2),0) as balance FROM Account as A LEFT JOIN MoneyTransaction as T ' +
       'ON A.id = T.refAccount GROUP BY A.id;';
     return this.databaseService.select(query, []);
   }

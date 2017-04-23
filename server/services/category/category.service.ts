@@ -3,6 +3,7 @@ import { DatabaseService } from '../database/database.service';
 import { CrudService } from '../crud.service';
 import { Category } from '../../models/category/category';
 import { Subcategory } from '../../models/category/subcategory';
+import { NumberUtils } from '../../utils/number.utils';
 
 @Service()
 export class CategoryService implements CrudService {
@@ -16,7 +17,7 @@ export class CategoryService implements CrudService {
 
     if (details) {
       query = 'SELECT C.id as catId, C.name as catName, ' +
-        'S.id as subId, S.name as subName, IFNULL(SUM(T.amount),0) as subBalance ' +
+        'S.id as subId, S.name as subName, IFNULL(ROUND(SUM(T.amount),2),0) as subBalance ' +
         'FROM Category as C LEFT JOIN Subcategory as S ON C.id = S.refCategory ' +
         'LEFT JOIN MoneyTransaction as T on S.id = T.refSubcategory WHERE C.id = ? GROUP BY S.id;';
     } else {
@@ -35,7 +36,7 @@ export class CategoryService implements CrudService {
 
     if (details) {
       query = 'SELECT C.id as catId, C.name as catName, ' +
-        'S.id as subId, S.name as subName, IFNULL(SUM(T.amount),0) as subBalance ' +
+        'S.id as subId, S.name as subName, IFNULL(ROUND(SUM(T.amount),2),0) as subBalance ' +
         'FROM Category as C LEFT JOIN Subcategory as S ON C.id = S.refCategory ' +
         'LEFT JOIN MoneyTransaction as T on S.id = T.refSubcategory GROUP BY S.id;';
     } else {
@@ -72,6 +73,8 @@ export class CategoryService implements CrudService {
         if (details) {
           subcategory.balance = row.subBalance;
           parentCategory.balance += row.subBalance;
+          // Somehow, sometimes, there is a lot a decimal digits...
+          parentCategory.balance = NumberUtils.round(parentCategory.balance);
         }
         parentCategory.subcategories.push(subcategory);
       }

@@ -7,6 +7,7 @@ import { Account } from '../shared/model/account';
 import { Category } from '../shared/model/category';
 import { Observable } from 'rxjs';
 import { Error } from '../shared/error';
+import { NumberUtils } from '../shared/utils/number.utils';
 
 @Component({
   selector: 'app-transaction',
@@ -170,7 +171,7 @@ export class TransactionComponent implements OnInit {
     for (let i = this.transactions.length - 1; i >= 0; i--) {
       let transaction: Transaction = this.transactions[ i ];
       let newBalance: number = accountBalances.get(transaction.account.id) + transaction.amount;
-      transaction.balance = newBalance;
+      transaction.balance = NumberUtils.round(newBalance);
       accountBalances.set(transaction.account.id, newBalance);
     }
   }
