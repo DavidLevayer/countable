@@ -179,10 +179,10 @@ export class TransactionComponent implements OnInit {
 
     let hours: number = transaction.date.getHours();
     let minutes: number = transaction.date.getMinutes();
-    let secondes: number = transaction.date.getSeconds();
+    let seconds: number = transaction.date.getSeconds();
 
     transaction.date.setTime(transaction.date.getTime() - hours * 60 * 60 * 1000
-      - minutes * 60 * 1000 - secondes * 1000);
+      - minutes * 60 * 1000 - seconds * 1000);
   }
 
   amountStyle(amount: number): string {
